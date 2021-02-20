@@ -44,6 +44,11 @@ export default class Index extends Component {
 
       
         }
+        backToIndex (){
+            this.setState( {
+book:null
+              })
+        }
 
     render() {
         return (
@@ -67,6 +72,7 @@ export default class Index extends Component {
                        
 
                     // </Router> */}
+
                    
                     {(this.state.books != null && this.state.book == null )?
                    
@@ -85,7 +91,7 @@ export default class Index extends Component {
 
                 </div>:
                 <div>
-                   
+                  <p onClick={()=>this.backToIndex()} >Back to home</p>
                 <Detail book={this.state.book}></Detail></div>
                     }
             </div>
