@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Detail from './Detail';
+import AddBook from './AddBook';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -11,6 +11,7 @@ export default class Index extends Component {
             book: null
         }
     }
+    
 
     componentDidMount() {
         axios.get("/bookclub/book/index")
@@ -49,31 +50,30 @@ export default class Index extends Component {
 book:null
               })
         }
+        addBook = (book) =>{
+            axios.post("/bookclub/book/add", book)
+                .then(response =>{
+                    console.log("book add sucssfully")
+                    const updatedBookList = [...this.state.books];
+                    updatedBookList.push(response.data);
+                    this.setState({
+                        books: updatedBookList
+                    })
+    
+                })
+                .catch(error =>{
+                    console.log("erroe in adding book");
+                    console.log(error)
+                })
+        }
 
     render() {
         return (
             <div>
-                
-
-
-
-                    {/* // <Router>
-               
-                    //     {this.state.books.map((book, index) =>
-                    //     <div onClick={()=>this.handelDetail(book,book.id)}>
-                    //         <Link to={`/detail?id=`+book.id}>
-                    //         <img src={book.image} />
-                    //         <h1>{book.bookName}</h1>
-                    //         </Link>
-                    //     </div>
-                    //     )}
-                    //     <Route exact path={`/detail?id=`+this.state.book.id} component={Detail}><Detail book={this.state.book}></Detail></Route>
-
-                       
-
-                    // </Router> */}
-
-                   
+            <div>
+               <AddBook addBook={this.addBook}></AddBook>
+            </div>
+                  
                     {(this.state.books != null && this.state.book == null )?
                    
                     <div>
@@ -85,20 +85,15 @@ book:null
                        
                     </div>
                     )}
-               
-
-                   
-
                 </div>:
                 <div>
                   <p onClick={()=>this.backToIndex()} >Back to home</p>
                 <Detail book={this.state.book}></Detail></div>
-                    }
+                    } 
             </div>
            
-            
+           
         )
     }
 }
 
-{/* <Detail book={book} key={book.id}></Detail> */ }
