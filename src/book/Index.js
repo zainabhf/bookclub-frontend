@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Detail from './Detail';
 import AddBook from './AddBook';
 import EditBook from './EditBook';
+import { Card } from 'react-bootstrap';
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -86,20 +87,23 @@ book:null
     
     render() {
         return (
-            <div>
+            <div >
             <div>
                <AddBook addBook={this.addBook}></AddBook>
             </div>
                   
                     {(this.state.books != null && this.state.book == null )?
                    
-                    <div>
+                    <div className="row">
                     {this.state.books.map((book, index) =>
                     <div onClick={()=>this.handelDetail(book,book.id)}>
+                      <Card style={{ width: '18rem' }}>
+                      <Card.Img variant="top" src={book.image} />
+                       <Card.Body>
+                          <Card.Title>{book.bookName}</Card.Title> 
+                       </Card.Body>
                       
-                        <img src={book.image} />
-                        <h1>{book.bookName}</h1>
-                       
+                        </Card>
                     </div>
                     )}
                 </div>:
