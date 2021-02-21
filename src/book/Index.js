@@ -2,17 +2,18 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Detail from './Detail';
 import AddBook from './AddBook';
+import EditBook from './EditBook';
 export default class Index extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             books: [],
-            book: null
+            book: null ,  
+            isEdit: false,
+            clickedBookId : ''
         }
     }
-    
-
     componentDidMount() {
         axios.get("/bookclub/book/index")
             .then(response => {
@@ -41,9 +42,6 @@ export default class Index extends Component {
                 console.log(" Error book ");
                 console.log(error);
             })
-
-
-      
         }
         backToIndex (){
             this.setState( {
@@ -67,7 +65,25 @@ book:null
                     console.log(error)
                 })
         }
-
+        editBook = (book) =>{
+            axios.put("bookclub/book/edit", book)
+                .then(response =>{
+                    console.log("Edited!!")
+                    console.log(response)
+                    this.setState({isEdit: !this.state.isEdit})
+                })
+                .catch(error =>{
+                    console.log("Error Editing book");
+                    console.log(error)
+                })
+        }
+        editView =(id) =>{
+            this.setState({
+                isEdit: !this.state.isEdit,
+                clickedBookId: id
+            })
+        }
+    
     render() {
         return (
             <div>
@@ -89,8 +105,13 @@ book:null
                 </div>:
                 <div>
                   <p onClick={()=>this.backToIndex()} >Back to home</p>
-                <Detail book={this.state.book}></Detail></div>
-                    } 
+                  {(this.state.isEdit == true) ?
+                 <EditBook book={this.state.book} editBook={this.editBook}></EditBook>
+             :
+                <Detail book={this.state.book} editView= {this.editView} deleteBook= {this.deleteBook} isEdit = {this.state.isEdit} ></Detail>
+                    } </div>  
+                    }
+                   
             </div>
            
            
