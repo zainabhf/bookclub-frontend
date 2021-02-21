@@ -11,7 +11,7 @@ export default class Index extends Component {
             book: null
         }
     }
-    
+
 
     componentDidMount() {
         axios.get("/bookclub/book/index")
@@ -22,78 +22,77 @@ export default class Index extends Component {
                 })
             })
             .catch(error => {
-                console.log(" Error book ");
+                console.log("Error book ");
                 console.log(error);
             })
 
 
     }
-        handelDetail(book,id){
-            console.log(book)
-            axios.get(`/bookclub/book/detail?id=${id}`)
-            .then(response =>{
+    handelDetail(book, id) {
+        console.log(book)
+        axios.get(`/bookclub/book/detail?id=${id}`)
+            .then(response => {
                 console.log(response)
                 this.setState({
                     book: book
                 })
             })
-            .catch(error =>{
-                console.log(" Error book ");
+            .catch(error => {
+                console.log("Error Fecthc book details");
                 console.log(error);
             })
+    }
 
+    backToIndex() {
+        this.setState({
+            book: null
+        })
+    }
 
-      
-        }
-        backToIndex (){
-            this.setState( {
-book:null
-              })
-        }
-        addBook = (book) =>{
-            axios.post("/bookclub/book/add",book)
-                .then(response =>{
-                    console.log("book add sucssfully")
-                    const updatedBookList = [...this.state.books];
-                    // updatedBookList.push(response.data);
-                    updatedBookList.push(response.data);
-                    this.setState({
-                        books:updatedBookList
-                    })
-    
+    addBook = (book) => {
+        axios.post("/bookclub/book/add", book)
+            .then(response => {
+                console.log("book add sucssfully")
+                const updatedBookList = [...this.state.books];
+                updatedBookList.push(response.data);
+                this.setState({
+                    books: updatedBookList
                 })
-                .catch(error =>{
-                    console.log("erroe in adding book");
-                    console.log(error)
-                })
-        }
+
+            })
+            .catch(error => {
+                console.log("Error adding book");
+                console.log(error)
+            })
+    }
 
     render() {
         return (
             <div>
-            <div>
-               <AddBook addBook={this.addBook}></AddBook>
-            </div>
-                  
-                    {(this.state.books != null && this.state.book == null )?
-                   
-                    <div>
-                    {this.state.books.map((book, index) =>
-                    <div onClick={()=>this.handelDetail(book,book.id)}>
-                      
-                        <img src={book.image} />
-                        <h1>{book.bookName}</h1>
-                       
-                    </div>
-                    )}
-                </div>:
                 <div>
-                  <p onClick={()=>this.backToIndex()} >Back to home</p>
-                <Detail book={this.state.book}></Detail></div>
-                    } 
+                    <AddBook addBook={this.addBook}></AddBook>
+                </div>
+
+                {(this.state.books != null && this.state.book == null) ?
+
+                    <div>
+                        {this.state.books.map((book, index) =>
+                            <div onClick={() => this.handelDetail(book, book.id)}>
+
+                                <img src={book.image} />
+                                <h1>{book.bookName}</h1>
+
+                            </div>
+                        )}
+                    </div> :
+                    <div>
+                        <p onClick={() => this.backToIndex()} >Back to home</p>
+                        <Detail book={this.state.book}></Detail>
+                    </div>
+                }
             </div>
-           
-           
+
+
         )
     }
 }
