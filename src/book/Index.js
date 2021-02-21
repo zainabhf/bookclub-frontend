@@ -27,37 +27,37 @@ export default class Index extends Component {
 
 
     }
-        handelDetail(book,id){
-            console.log(book)
-            axios.get(`/bookclub/book/detail?id=${id}`)
-            .then(response =>{
+    handelDetail(book, id) {
+        console.log(book)
+        axios.get(`/bookclub/book/detail?id=${id}`)
+            .then(response => {
                 console.log(response)
                 this.setState({
                     book: book
                 })
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(" Error book ");
                 console.log(error);
             })
 
 
-      
-        }
-        backToIndex (){
-            this.setState( {
-book:null
-              })
-        }
+
+    }
+    backToIndex() {
+        this.setState({
+            book: null
+        })
+    }
 
     render() {
         return (
             <div>
-                
 
 
 
-                    {/* // <Router>
+
+                {/* // <Router>
                
                     //     {this.state.books.map((book, index) =>
                     //     <div onClick={()=>this.handelDetail(book,book.id)}>
@@ -73,30 +73,30 @@ book:null
 
                     // </Router> */}
 
-                   
-                    {(this.state.books != null && this.state.book == null )?
-                   
+
+                {(this.state.books != null && this.state.book == null) ?
+
                     <div>
-                    {this.state.books.map((book, index) =>
-                    <div onClick={()=>this.handelDetail(book,book.id)}>
-                      
-                        <img src={book.image} />
-                        <h1>{book.bookName}</h1>
-                       
-                    </div>
-                    )}
-               
+                        {this.state.books.map((book, index) =>
+                            <div onClick={() => this.handelDetail(book, book.id)}>
 
-                   
+                                <img src={book.image} />
+                                <h1>{book.bookName}</h1>
 
-                </div>:
-                <div>
-                  <p onClick={()=>this.backToIndex()} >Back to home</p>
-                <Detail book={this.state.book}></Detail></div>
-                    }
+                            </div>
+                        )}
+
+
+
+
+                    </div> :
+                    <div>
+                        <p onClick={() => this.backToIndex()} >Back to home</p>
+                        <Detail book={this.state.book}></Detail></div>
+                }
             </div>
-           
-            
+
+
         )
     }
 }
