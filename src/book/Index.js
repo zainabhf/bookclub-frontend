@@ -87,7 +87,8 @@ export default class Index extends Component {
                     </div> :
                     <div>
                         <p onClick={() => this.backToIndex()} >Back to home</p>
-                        <Detail book={this.state.book}></Detail></div>
+                        <Detail book={this.state.book}></Detail>
+                    </div>
                 }
             </div>
 
