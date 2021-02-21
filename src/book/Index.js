@@ -22,7 +22,7 @@ export default class Index extends Component {
                 })
             })
             .catch(error => {
-                console.log(" Error book ");
+                console.log("Error book ");
                 console.log(error);
             })
 
@@ -38,18 +38,17 @@ export default class Index extends Component {
                 })
             })
             .catch(error => {
-                console.log(" Error book ");
+                console.log("Error Fecthc book details");
                 console.log(error);
             })
-
-
-
     }
+
     backToIndex() {
         this.setState({
             book: null
         })
     }
+
     addBook = (book) => {
         axios.post("/bookclub/book/add", book)
             .then(response => {
@@ -62,7 +61,7 @@ export default class Index extends Component {
 
             })
             .catch(error => {
-                console.log("erroe in adding book");
+                console.log("Error adding book");
                 console.log(error)
             })
     }
