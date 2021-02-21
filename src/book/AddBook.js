@@ -3,6 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap'
 export default class AddBook extends Component {
     constructor(props) {
         super(props)
+
         this.state = {
             newBook: {}
         }
@@ -10,17 +11,24 @@ export default class AddBook extends Component {
     handleChange = (event) => {
         const attributeToChange = event.target.name
         const newValue = event.target.value
+
         const updatedBook = { ...this.state.newBook }
         updatedBook[attributeToChange] = newValue
         console.log(updatedBook)
         this.setState({
             newBook: updatedBook
         })
+
     }
+
     handleSubmit = (event) => {
         event.preventDefault()
+
         this.props.addBook(this.state.newBook);
     }
+
+
+
     render() {
         return (
             <div>
@@ -54,8 +62,9 @@ export default class AddBook extends Component {
                         <Form.Control type="date" name="publish" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Button variant="primary" onClick={this.handleSubmit}>Submint</Button>
+
                 </Container>
-            </div>
+            </div >
         )
     }
 }
