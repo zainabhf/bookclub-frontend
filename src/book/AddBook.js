@@ -36,7 +36,7 @@ export default class AddBook extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Book Name </Form.Label>
-                        <Form.Control type="text" name="BookName" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="bookName" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image</Form.Label>
