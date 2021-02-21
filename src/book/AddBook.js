@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-
 export default class AddBook extends Component {
     constructor(props) {
         super(props)
@@ -36,7 +35,7 @@ export default class AddBook extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Book Name </Form.Label>
-                        <Form.Control type="text" name="BookName" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="bookName" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image</Form.Label>
@@ -62,12 +61,10 @@ export default class AddBook extends Component {
                         <Form.Label>Publish Date</Form.Label>
                         <Form.Control type="date" name="publish" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
-
-
                     <Button variant="primary" onClick={this.handleSubmit}>Submint</Button>
 
                 </Container>
-            </div>
+            </div >
         )
     }
 }
