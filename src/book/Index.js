@@ -51,13 +51,14 @@ book:null
               })
         }
         addBook = (book) =>{
-            axios.post("/bookclub/book/add", book)
+            axios.post("/bookclub/book/add",book)
                 .then(response =>{
                     console.log("book add sucssfully")
                     const updatedBookList = [...this.state.books];
+                    // updatedBookList.push(response.data);
                     updatedBookList.push(response.data);
                     this.setState({
-                        books: updatedBookList
+                        books:updatedBookList
                     })
     
                 })
