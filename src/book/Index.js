@@ -63,7 +63,8 @@ export default class Index extends Component {
     viewAddBook = () => {
         this.setState({
             isAdd: true,
-            book: null
+            book: null,
+            isEdit: false
         })
     }
 
@@ -91,6 +92,7 @@ export default class Index extends Component {
                 console.log("Edited!!")
                 console.log(response)
                 this.setState({ isEdit: !this.state.isEdit })
+                this.loadBook()
             })
             .catch(error => {
                 console.log("Error Editing book");
