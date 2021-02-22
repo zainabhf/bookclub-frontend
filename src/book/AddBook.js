@@ -43,7 +43,7 @@ export default class AddBook extends Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>number Of pages </Form.Label>
-                        <Form.Control type="text" name="numberOfpages" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="number" name="numberOfpages" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Author Name</Form.Label>
@@ -61,7 +61,7 @@ export default class AddBook extends Component {
                         <Form.Label>Publish Date</Form.Label>
                         <Form.Control type="date" name="publish" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
-                    <Button variant="primary" onClick={this.handleSubmit}>Submint</Button>
+                    <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
 
                 </Container>
             </div >

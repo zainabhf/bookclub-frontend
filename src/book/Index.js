@@ -4,31 +4,34 @@ import Detail from './Detail';
 import AddBook from './AddBook';
 import EditBook from './EditBook';
 import { Card } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
 export default class Index extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             books: [],
             book: null,
             isEdit: false,
-            clickedBookId: ''
+            clickedBookId: '',
+            redirect: null
         }
     }
     componentDidMount() {
+        this.loadBook()
+    }
+    loadBook = () => {
         axios.get("/bookclub/book/index")
-            .then(response => {
-                console.log(response)
-                this.setState({
-                    books: response.data
-                })
+        .then(response =>{
+            console.log("loadBook")
+            console.log(response)
+            this.setState({
+                books: response.data
             })
-            .catch(error => {
-                console.log(" Error book ");
-                console.log(error);
-            })
-
-
+        })
+        .catch(error =>{
+            console.log("Error retreiving books !!");
+            console.log(error);
+        })
     }
     handelDetail(book, id) {
         console.log(book)
@@ -59,7 +62,6 @@ export default class Index extends Component {
                 this.setState({
                     books: updatedBookList
                 })
-
             })
             .catch(error => {
                 console.log("erroe in adding book");
@@ -85,13 +87,29 @@ export default class Index extends Component {
         })
     }
 
+    deleteBook= (id) =>{
+        axios.delete(`/bookclub/book/delete?id=${id}`)
+        .then(response =>{
+            console.log("Deleted!")
+            console.log(response)
+            this.loadBook()
+            this.setState({book:null,
+                redirect: `/book/index`})
+        })
+    .catch(error =>{
+        console.log(error)
+    })}
     render() {
+        if (this.state.redirect) {
+             <Redirect to={this.state.redirect} />
+             
+          }
+          console.log(this.state.books)
         return (
             <div >
                 <div>
                     <AddBook addBook={this.addBook}></AddBook>
                 </div>
-
                 {(this.state.books != null && this.state.book == null) ?
 
                     <div className="row">
@@ -102,7 +120,6 @@ export default class Index extends Component {
                                     <Card.Body>
                                         <Card.Title>{book.bookName}</Card.Title>
                                     </Card.Body>
-
                                 </Card>
                             </div>
                         )}
@@ -112,14 +129,10 @@ export default class Index extends Component {
                         {(this.state.isEdit === true) ?
                             <EditBook book={this.state.book} editBook={this.editBook}></EditBook>
                             :
-                            <Detail book={this.state.book} editView={this.editView} deleteBook={this.deleteBook} isEdit={this.state.isEdit} ></Detail>
+                            <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} ></Detail>
                         } </div>
                 }
-
             </div>
-
-
         )
     }
 }
-
