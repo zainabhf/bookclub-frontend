@@ -2,32 +2,32 @@ import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 
 export default class EditBook extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state ={
-            newBook : props.book
+        this.state = {
+            newBook: props.book
         }
     }
-    handleChange= (event) =>{
+    handleChange = (event) => {
         const attributeToChange = event.target.name
         const newValue = event.target.value
 
-        const updatedBook = {...this.state.newBook}
+        const updatedBook = { ...this.state.newBook }
         updatedBook[attributeToChange] = newValue
         console.log(updatedBook)
         this.setState({
-            newBook:updatedBook
+            newBook: updatedBook
         })
 
     }
 
-    handleSubmit =(event) =>{
-    console.log(this.state.newBook)
+    handleSubmit = (event) => {
+        console.log(this.state.newBook)
         event.preventDefault()
 
         this.props.editBook(this.state.newBook);
     }
-    
+
     render() {
         return (
             <div>
@@ -50,7 +50,7 @@ export default class EditBook extends Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control type="text" name="category"  value={this.state.newBook.category} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="category" value={this.state.newBook.category} onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
