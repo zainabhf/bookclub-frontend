@@ -34,27 +34,27 @@ export default class EditBook extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Book Name </Form.Label>
-                        <Form.Control type="text" name="bookName" value={this.state.newBook.bookName} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="bookName" value={this.state.newBook.bookName} placeholder="Book Name" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image</Form.Label>
-                        <Form.Control type="text" name="image" value={this.state.newBook.image} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="image" value={this.state.newBook.image} placeholder="URL Image" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>number Of pages </Form.Label>
-                        <Form.Control type="number" name="numberOfpages" value={this.state.newBook.numberOfpages} onChange={this.handleChange}></Form.Control>
+                        <Form.Label>Number Of Pages </Form.Label>
+                        <Form.Control type="number" name="numberOfpages" value={this.state.newBook.numberOfpages} placeholder="Number of Pages" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Author Name</Form.Label>
-                        <Form.Control type="text" name="authorName" value={this.state.newBook.authorName} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="authorName" value={this.state.newBook.authorName} placeholder="Author Name" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control type="text" name="category" value={this.state.newBook.category} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="category" value={this.state.newBook.category} placeholder="Category" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" name="description" value={this.state.newBook.description} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="description" value={this.state.newBook.description} placeholder="Description" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Publish Date</Form.Label>
@@ -63,7 +63,7 @@ export default class EditBook extends Component {
                     <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
 
                 </Container>
-            </div>
+            </div >
         )
     }
 }
