@@ -13,7 +13,11 @@ export default class AddBook extends Component {
         const newValue = event.target.value
 
         const updatedBook = { ...this.state.newBook }
-        updatedBook[attributeToChange] = newValue
+        if (updatedBook[attributeToChange] != "") {
+            updatedBook[attributeToChange] = newValue
+        } else {
+            updatedBook[attributeToChange] = "empty"
+        }
         console.log(updatedBook)
         this.setState({
             newBook: updatedBook
@@ -43,7 +47,7 @@ export default class AddBook extends Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>number Of pages </Form.Label>
-                        <Form.Control type="text" name="numberOfpages" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="number" name="numberOfpages" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Author Name</Form.Label>
@@ -61,7 +65,7 @@ export default class AddBook extends Component {
                         <Form.Label>Publish Date</Form.Label>
                         <Form.Control type="date" name="publish" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
-                    <Button variant="primary" onClick={this.handleSubmit}>Submint</Button>
+                    <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
 
                 </Container>
             </div >
