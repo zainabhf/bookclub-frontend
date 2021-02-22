@@ -6,7 +6,7 @@ export default class LogIn extends Component {
         return (
             <div>
                 <Container>
-                 <Form.Group>
+                    <Form.Group>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control type="email" name="emailAddress" ></Form.Control>
                     </Form.Group>

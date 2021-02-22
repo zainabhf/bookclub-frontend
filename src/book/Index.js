@@ -21,17 +21,17 @@ export default class Index extends Component {
     }
     loadBook = () => {
         axios.get("/bookclub/book/index")
-        .then(response =>{
-            console.log("loadBook")
-            console.log(response)
-            this.setState({
-                books: response.data
+            .then(response => {
+                console.log("loadBook")
+                console.log(response)
+                this.setState({
+                    books: response.data
+                })
             })
-        })
-        .catch(error =>{
-            console.log("Error retreiving books !!");
-            console.log(error);
-        })
+            .catch(error => {
+                console.log("Error retreiving books !!");
+                console.log(error);
+            })
     }
     handelDetail(book, id) {
         console.log(book)
@@ -87,24 +87,27 @@ export default class Index extends Component {
         })
     }
 
-    deleteBook= (id) =>{
+    deleteBook = (id) => {
         axios.delete(`/bookclub/book/delete?id=${id}`)
-        .then(response =>{
-            console.log("Deleted!")
-            console.log(response)
-            this.loadBook()
-            this.setState({book:null,
-                redirect: `/book/index`})
-        })
-    .catch(error =>{
-        console.log(error)
-    })}
+            .then(response => {
+                console.log("Deleted!")
+                console.log(response)
+                this.loadBook()
+                this.setState({
+                    book: null,
+                    redirect: `/book/index`
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
     render() {
         if (this.state.redirect) {
-             <Redirect to={this.state.redirect} />
-             
-          }
-          console.log(this.state.books)
+            <Redirect to={this.state.redirect} />
+
+        }
+        console.log(this.state.books)
         return (
             <div >
                 <div>
