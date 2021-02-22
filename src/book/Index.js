@@ -16,19 +16,22 @@ export default class Index extends Component {
         }
     }
     componentDidMount() {
+        this.loadBook()
+
+    }
+    loadBook = () => {
         axios.get("/bookclub/book/index")
-            .then(response => {
-                console.log(response)
-                this.setState({
-                    books: response.data
-                })
-            })
-            .catch(error => {
-                console.log(" Error book ");
-                console.log(error);
-            })
+        .then(response =>{
+            console.log(response)
+            this.setState({
+                books: response.data
 
-
+            })
+        })
+        .catch(error =>{
+            console.log("Error retreiving books !!");
+            console.log(error);
+        })
     }
         handelDetail(book,id){
             console.log(book)
@@ -53,12 +56,8 @@ book:null
             axios.post("/bookclub/book/add",book)
                 .then(response =>{
                     console.log("book add sucssfully")
-                    const updatedBookList = [...this.state.books];
-                    // updatedBookList.push(response.data);
-                    updatedBookList.push(response.data);
-                    this.setState({
-                        books:updatedBookList
-                    })
+                    this.loadBook()
+                    
     
                 })
                 .catch(error =>{
@@ -72,6 +71,7 @@ book:null
                     console.log("Edited!!")
                     console.log(response)
                     this.setState({isEdit: !this.state.isEdit})
+                    // this.loadBook()
                 })
                 .catch(error =>{
                     console.log("Error Editing book");
@@ -84,7 +84,19 @@ book:null
                 clickedBookId: id
             })
         }
-    
+        deleteBook= (id) =>{
+            axios.delete(`/bookclub/book/delete?id=${id}`)
+            .then(response =>{
+                console.log("Deleted!")
+                console.log(response)
+                this.loadBook()
+
+            })
+        .catch(error =>{
+            console.log(error)
+
+        })}
+            
     render() {
         return (
             <div >
