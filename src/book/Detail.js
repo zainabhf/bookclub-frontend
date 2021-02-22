@@ -8,6 +8,7 @@ constructor(props) {
     }
 }
     render() {
+        console.log(this.props.book)
         return (
 
             <div>
