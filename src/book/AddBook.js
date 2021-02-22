@@ -13,7 +13,11 @@ export default class AddBook extends Component {
         const newValue = event.target.value
 
         const updatedBook = { ...this.state.newBook }
-        updatedBook[attributeToChange] = newValue
+        if (updatedBook[attributeToChange] != "") {
+            updatedBook[attributeToChange] = newValue
+        } else {
+            updatedBook[attributeToChange] = "empty"
+        }
         console.log(updatedBook)
         this.setState({
             newBook: updatedBook

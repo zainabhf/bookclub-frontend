@@ -3,21 +3,21 @@ import axios from 'axios'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             user:""
+            user: ""
         }
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         axios.get("/bookclub/user/profile?id=1")
-            .then(response =>{
+            .then(response => {
                 console.log(response)
                 this.setState({
-                   user: response.data
+                    user: response.data
                 })
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(" Error profile ");
                 console.log(error);
             })
@@ -27,7 +27,7 @@ export default class Profile extends Component {
     render() {
         return (
             <div>
-                
+
             </div>
         )
     }
