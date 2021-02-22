@@ -32,7 +32,7 @@ export default class EditBook extends Component {
         return (
             <div>
                 <Container >
-                    <Form.Group >
+                    <Form.Group>
                         <Form.Label>Book Name </Form.Label>
                         <Form.Control type="text" name="bookName" value={this.state.newBook.bookName} onChange={this.handleChange}></Form.Control>
                     </Form.Group>
@@ -60,6 +60,7 @@ export default class EditBook extends Component {
                         <Form.Label>Publish Date</Form.Label>
                         <Form.Control type="date" name="publish" value={this.state.newBook.publish} onChange={this.handleChange}></Form.Control>
                     </Form.Group>
+                    <Form.Control type="hidden" name="id" value={this.state.newBook.id} onChange={this.handleChange}></Form.Control>
                     <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
 
                 </Container>
