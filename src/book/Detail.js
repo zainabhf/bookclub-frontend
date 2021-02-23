@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AddReview from './review/AddReview'
 
 export default class Detail extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ export default class Detail extends Component {
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
                         <hr />
+                        <AddReview />
                     </div>
                     :
                     <h1>Nothig to show</h1>}
