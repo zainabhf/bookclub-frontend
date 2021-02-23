@@ -1,38 +1,55 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 
-
-
-
 export default class AddReview extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            newReview: props.book.review_book,
-            book:props.book
+            newBook: props.book,
+            review: "",
+            newObj: {}
         }
+
+        console.log(props.book)
     }
-    handelSubmit=(event)=>{
-        // event.preventDefault()
-        console.log("we are sending review:)")
-        this.props.addReview(this.state.book)
 
+    componentDidMount() {
+        const updatedReview = this.state.newObj
 
-
+        updatedReview["book"] = this.state.newBook
     }
-    handleChange=(event)=>{
+
+    handelSubmitReview = (event) => {
+        console.log("we are sending review :)")
+        // console.log(this.state.newObj)
+        // {this.state.newObj}
+        // this.setState({
+        //     newObj: {
+        //         review: this.state.review,
+        //         book: this.state.newBook
+        //     }
+        // })
+        // console.log(this.state.newObj)
+
+        this.props.addReview(this.state.newObj)
+    }
+
+    handleChangeReview = (event) => {
         const attributeToChange = event.target.name
         const newValue = event.target.value
 
-        const book = {...this.state.book}
-        
-        book[attributeToChange]= newValue
-       
-        console.log(book)
+        const review = { ...this.state.newObj }
+
+        review[attributeToChange] = newValue
+
+
+        console.log(review)
         this.setState({
-            book:book
+            newObj: review
         })
+
+        console.log(this.state.newObj)
     }
     
 
@@ -42,12 +59,11 @@ export default class AddReview extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Review</Form.Label>
-                        <Form.Control type="text" name="review_book" placeholder="Add Review" onChange={this.handleChange}/>
-                        <Button variant="primary" handelSubmit={this.handelSubmit()}>Submit</Button>
+                        <Form.Control type="text" name="reviewContent" placeholder="Type" onChange={this.handleChangeReview} />
+                        <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
                     </Form.Group>
                 </Container>
             </div>
         )
     }
 }
-// test

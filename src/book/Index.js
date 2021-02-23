@@ -107,7 +107,8 @@ export default class Index extends Component {
     }
 
     deleteBook = (id) => {
-        axios.delete(`/bookclub/book/delete?id=${id}`)
+        axios
+            .delete(`/bookclub/book/delete?id=${id}`)
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
@@ -135,7 +136,7 @@ export default class Index extends Component {
                         {(this.state.books != null && this.state.book == null) ?
 
                             <div className="row">
-                                {this.state.books.map((book,index) =>
+                                {this.state.books.map((book, index) =>
                                     <div onClick={() => this.handelDetail(book, book.id)}>
                                         <Card style={{ width: '18rem' }} index={index} key={book.id}>
                                             <Card.Img variant="top" src={book.image} alt="Book image" />

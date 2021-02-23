@@ -7,22 +7,28 @@ export default class Detail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-        review_book: this.props.book.review_book
-       
+            review_book: props.book.review_book,
+            review_content: {},
+            // book: props.book
         }
     }
 
 
-    addReview = (book) => {
-        axios.post("/bookclub/review/add",book)
+    addBookReview = (review) => {
+        console.log("Book to be show")
+        axios.post("/bookclub/review/add", review)
             .then(response => {
-                console.log("Add Review: " + response)
-                console.log("Add Review: " + book)
-                this.setState((prev)=> {
-                    review_book: prev.this.book.review_book.push(response.data.review_book)
-                    })
-            })
+                console.log("Add Review - response: ") // get from class review
+                console.log(response.data)
+                console.log("Add Review: - review of book ") // get from class book
+                console.log(review)
 
+
+                this.setState({
+                    review_content: this.state.review_book
+
+                })
+            })
             .catch(error => {
                 console.log(" Error adding review ");
                 console.log(error);
@@ -30,7 +36,6 @@ export default class Detail extends Component {
     }
 
     render() {
-        console.log(this.props.book)
         return (
 
             <div>
@@ -48,17 +53,17 @@ export default class Detail extends Component {
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
                         <hr />
-                        {(this.props.book.review_book!=null)?
-                        <div>
-                            {this.props.book.review_book.map((review, index) =>
-                            <p key={index}>{review.reviewContent}</p>
-                        )}
-                        </div>:<div></div>
-                    
-                    }
-                        
+                        {(this.props.book.review_book != null) ?
+                            <div>
+                                {this.props.book.review_book.map((review, index) =>
+                                    <p key={index}>{review.reviewContent}</p>
+                                )}
+                            </div> : <div></div>
+
+                        }
+
                         <hr />
-                        <AddReview addReview={this.addReview} book={this.props.book} />
+                        <AddReview addReview={this.addBookReview} book={this.props.book} />
                     </div>
                     :
                     <h1>Nothing to show</h1>}

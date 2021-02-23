@@ -9,9 +9,9 @@ export default class Home extends Component {
           <img src="" alt="landing page" />
         </main>
         <p>It's Home page !</p>
-        <fotter>
+        <footer>
 
-        </fotter>
+        </footer>
       </div>
     )
   }
