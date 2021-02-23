@@ -9,6 +9,7 @@ export default class AddReview extends Component {
     handelSubmit=(event)=>{
         this.props.addReview(event.target.value)
     }
+
     render() {
         return (
             <div>
@@ -23,3 +24,4 @@ export default class AddReview extends Component {
         )
     }
 }
+// test
