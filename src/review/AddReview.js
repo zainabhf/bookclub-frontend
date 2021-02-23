@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 
 
+
+
 export default class AddReview extends Component {
+  
+    handelSubmit=(event)=>{
+        this.props.addReview(event.target.value)
+    }
     render() {
         return (
             <div>
@@ -10,7 +16,7 @@ export default class AddReview extends Component {
                     <Form.Group >
                         <Form.Label>Review</Form.Label>
                         <Form.Control type="text" name="reviewContent" placeholder="Add Review" />
-                        <Button variant="primary">Submit</Button>
+                        <Button variant="primary" handelSubmit={this.handelSubmit}>Submit</Button>
                     </Form.Group>
                 </Container>
             </div>
