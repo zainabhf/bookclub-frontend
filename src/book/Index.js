@@ -63,7 +63,8 @@ export default class Index extends Component {
     viewAddBook = () => {
         this.setState({
             isAdd: true,
-            book: null
+            book: null,
+            isEdit: false
         })
     }
 
@@ -91,6 +92,7 @@ export default class Index extends Component {
                 console.log("Edited!!")
                 console.log(response)
                 this.setState({ isEdit: !this.state.isEdit })
+                this.loadBook()
             })
             .catch(error => {
                 console.log("Error Editing book");
@@ -133,9 +135,9 @@ export default class Index extends Component {
                         {(this.state.books != null && this.state.book == null) ?
 
                             <div className="row">
-                                {this.state.books.map((book) =>
+                                {this.state.books.map((book,index) =>
                                     <div onClick={() => this.handelDetail(book, book.id)}>
-                                        <Card style={{ width: '18rem' }}>
+                                        <Card style={{ width: '18rem' }} index={index} key={book.id}>
                                             <Card.Img variant="top" src={book.image} alt="Book image" />
                                             <Card.Body>
                                                 <Card.Title>{book.bookName}</Card.Title>

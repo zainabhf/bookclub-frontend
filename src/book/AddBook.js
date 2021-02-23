@@ -39,27 +39,27 @@ export default class AddBook extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Book Name </Form.Label>
-                        <Form.Control type="text" name="bookName" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="bookName" placeholder="Book Name" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image</Form.Label>
-                        <Form.Control type="text" name="image" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="image" placeholder="URL of Image" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>number Of pages </Form.Label>
-                        <Form.Control type="number" name="numberOfpages" onChange={this.handleChange}></Form.Control>
+                        <Form.Label>Number Of Pages </Form.Label>
+                        <Form.Control type="number" name="numberOfpages" placeholder="Number of Pages" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Author Name</Form.Label>
-                        <Form.Control type="text" name="authorName" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="authorName" placeholder="Author Name" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control type="text" name="category" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="category" placeholder="Category" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" name="description" onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" name="description" placeholder="Description" onChange={this.handleChange}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Publish Date</Form.Label>
