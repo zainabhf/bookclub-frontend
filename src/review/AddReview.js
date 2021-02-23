@@ -51,6 +51,7 @@ export default class AddReview extends Component {
 
         console.log(this.state.newObj)
     }
+    
 
     render() {
         return (
