@@ -4,21 +4,27 @@ import AddReview from '../review/AddReview'
 
 
 export default class Detail extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+        review_book: this.props.book.review_book
+       
+        }
+    }
 
 
-
-    addReview = (review) => {
-        axios.post("/bookclub/review/add")
+    addReview = (book) => {
+        axios.post("/bookclub/review/add",book)
             .then(response => {
                 console.log("Add Review: " + response)
-
-                this.setState({
-                    reviews: this.state.reviews.concat(review)
-                })
+                console.log("Add Review: " + book)
+                this.setState((prev)=> {
+                    review_book: prev.this.book.review_book.push(response.data.review_book)
+                    })
             })
 
             .catch(error => {
-                console.log(" Error book ");
+                console.log(" Error adding review ");
                 console.log(error);
             })
     }
@@ -42,14 +48,20 @@ export default class Detail extends Component {
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
                         <hr />
-                        {this.props.book.review_book.map((review, index) =>
+                        {(this.props.book.review_book!=null)?
+                        <div>
+                            {this.props.book.review_book.map((review, index) =>
                             <p key={index}>{review.reviewContent}</p>
                         )}
+                        </div>:<div></div>
+                    
+                    }
+                        
                         <hr />
-                        <AddReview addReview={this.addReview} />
+                        <AddReview addReview={this.addReview} book={this.props.book} />
                     </div>
                     :
-                    <h1>Nothig to show</h1>}
+                    <h1>Nothing to show</h1>}
             </div>
         )
     }
