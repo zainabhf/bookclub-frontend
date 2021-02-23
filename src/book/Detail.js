@@ -5,10 +5,9 @@ import AddReview from '../review/AddReview'
 
 export default class Detail extends Component {
 
-
-
     addReview = (review) => {
-        axios.post("/bookclub/review/add")
+        axios
+            .post("/bookclub/review/add")
             .then(response => {
                 console.log("Add Review: " + response)
 
@@ -16,7 +15,6 @@ export default class Detail extends Component {
                     reviews: this.state.reviews.concat(review)
                 })
             })
-
             .catch(error => {
                 console.log(" Error book ");
                 console.log(error);
@@ -24,7 +22,6 @@ export default class Detail extends Component {
     }
 
     render() {
-        console.log(this.props.book)
         return (
 
             <div>

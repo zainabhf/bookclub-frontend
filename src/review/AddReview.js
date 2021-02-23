@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 
-
-
-
 export default class AddReview extends Component {
-  
-    handelSubmit=(event)=>{
+
+    handelSubmit = (event) => {
         this.props.addReview(event.target.value)
     }
 
@@ -24,4 +21,3 @@ export default class AddReview extends Component {
         )
     }
 }
-// test
