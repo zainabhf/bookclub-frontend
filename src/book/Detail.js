@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import AddReview from '../review/AddReview'
 import EditReview from '../review/EditReview'
+
 export default class Detail extends Component {
     constructor(props) {
         super(props)
@@ -18,8 +19,7 @@ export default class Detail extends Component {
             reviewToBeEdited: review
         })
     }
-
-    submitEditReview = () => {
+  submitEditReview = () => {
         console.log("inside submit edit of review")
         this.setState({
             isEditReview: false,
@@ -42,6 +42,27 @@ export default class Detail extends Component {
                 console.log(" Error adding review ");
                 console.log(error);
             })
+    }
+    editBookReview = (review) => {
+        console.log("review is edited !")
+        axios.put(`/bookclub/review/edit?id=${review.id}` , review) 
+            .then(response => {
+                console.log("Add Review - response: ") // get from class review
+                console.log(response.data)
+                console.log("Add Review: - review of book ") // get from class book
+                console.log(review)
+                this.setState({
+                    review_content: this.state.review_book
+                })
+                this.submitEditReview()
+            })
+            .catch(error => {
+                console.log(" Error adding review ");
+                console.log(error);
+            })
+
+
+
     }
     render() {
         return (
@@ -80,10 +101,10 @@ export default class Detail extends Component {
                                     <div>
                                         <EditReview
                                             review_book={this.state.review_book}
-                                            // book={this.props.book}
+                                            book={this.props.book}
                                             // id={this.state.idOfReview}
                                             submitEditReview={this.submitEditReview}
-                                            reviewToBeEdited={this.state.reviewToBeEdited} />
+                                            reviewToBeEdited={this.state.reviewToBeEdited} editBookReview = {this.editBookReview} />
                                     </div>
                                 } </div>
                             :
@@ -91,6 +112,7 @@ export default class Detail extends Component {
                         }
                         <hr />
                         <AddReview addReview={this.addBookReview} book={this.props.book} />
+
                     </div>
                     :
                     <h1>Nothing to show</h1>

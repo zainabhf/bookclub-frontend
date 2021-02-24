@@ -64,6 +64,7 @@ export default class AddBook extends Component {
                     <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
 
                 </Container>
+              {console.log(this.state.newBook)}
             </div >
         )
     }
