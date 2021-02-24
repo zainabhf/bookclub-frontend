@@ -8,16 +8,14 @@ export default class AddBook extends Component {
             newBook: {}
         }
     }
+
     handleChange = (event) => {
         const attributeToChange = event.target.name
         const newValue = event.target.value
 
         const updatedBook = { ...this.state.newBook }
-        if (updatedBook[attributeToChange] != "") {
-            updatedBook[attributeToChange] = newValue
-        } else {
-            updatedBook[attributeToChange] = "empty"
-        }
+        updatedBook[attributeToChange] = newValue
+
         console.log(updatedBook)
         this.setState({
             newBook: updatedBook
@@ -30,8 +28,6 @@ export default class AddBook extends Component {
 
         this.props.addBook(this.state.newBook);
     }
-
-
 
     render() {
         return (
