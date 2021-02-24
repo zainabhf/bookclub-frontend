@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import AddReview from '../review/AddReview'
-
+import EditReview from '../review/EditReview'
 
 export default class Detail extends Component {
     constructor(props) {
@@ -9,10 +9,16 @@ export default class Detail extends Component {
         this.state = {
             review_book: props.book.review_book,
             review_content: {},
+            isEditReview: false
             // book: props.book
         }
     }
+    editViewReview() {
+        this.setState({
+            isEditReview: true
+        })
 
+    }
 
     addBookReview = (review) => {
         console.log("Book to be show")
@@ -48,22 +54,33 @@ export default class Detail extends Component {
 
                         <p>Pages: {this.props.book.numberOfpages}</p>
                         <p>Publishing Date: {this.props.book.publish}</p>
-
-
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
                         <hr />
                         {(this.props.book.review_book != null) ?
                             <div>
-                                {this.props.book.review_book.map((review, index) =>
-                                    <p key={index}>{review.reviewContent}</p>
-                                )}
-                            </div> : <div></div>
+                                {(this.state.isEditReview != true) ?
+                                    <div>
+                                        {this.props.book.review_book.map((review, index) =>
+                                        <div>
+                                            <p key={review.id}>{review.reviewContent}</p>
+                                            <button onClick={() => { this.editViewReview() }}  key={review.id}>Edit</button>
+                                            </div>
+                                        )}
+                                      
+                                    </div> :
+                                    <div><EditReview  review_content = {this.state.review_book}  book = {this.props.book}/></div>
+                                } </div>
+
+
+                            :
+                            <div></div>
 
                         }
 
                         <hr />
                         <AddReview addReview={this.addBookReview} book={this.props.book} />
+
                     </div>
                     :
                     <h1>Nothing to show</h1>}
