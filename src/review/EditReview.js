@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 export default class EditReview extends Component {
@@ -5,7 +6,8 @@ export default class EditReview extends Component {
         super(props)
 
         this.state = {
-            review_content: props.reviewToBeEdited
+            review_content: props.reviewToBeEdited,
+           
         }
 
         this.handelOnChange = this.handelOnChange.bind(this)
@@ -13,24 +15,24 @@ export default class EditReview extends Component {
     }
 
     handelSubmit() {
-
-    }
+       this.props.editBookReview(this.state.review_content)
+    } 
 
     handelOnChange(event) {
-        // const attributeToChange = event.target.name
-        // const newValue = event.target.value
+        const attributeToChange = event.target.name
+        const newValue = event.target.value
+       
+        const review = { ...this.state.review_content }
 
-        // const review = { ...this.state.review_conetnt }
-
-        // review[attributeToChange] = newValue
-
-
-        // console.log(review)
-        // this.setState({
-        //     review_conetnt: review
-        // })
-
-        // console.log(this.state.newObj)
+        review[attributeToChange] = newValue
+        review["book"] = this.props.book
+    
+        console.log(review)
+        this.setState({
+            review_content: review
+        })
+     
+        console.log(review)
     }
 
     render() {
@@ -44,11 +46,14 @@ export default class EditReview extends Component {
                             type="text"
                             name="reviewContent"
                             value={this.state.review_content.reviewContent}
+                            onChange = {this.handelOnChange}
                         />
-                        <Button variant="primary" onClick={() => this.props.submitEditReview()}>Submit</Button>
+                        <Button variant="primary" onClick={this.handelSubmit}>Submit</Button>
                     </Form.Group>
                 </Container>
                 {/* {this.state.reviewToBeEdited.id} */}
+                {console.log(this.state.review_content)}
+
             </div>
         )
     }
