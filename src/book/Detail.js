@@ -64,6 +64,23 @@ export default class Detail extends Component {
 
 
     }
+    deleteReview = (id) => {
+        axios
+            .delete(`/bookclub/review/delete?id=${id}`)
+            .then(response => {
+                console.log("Deleted!")
+                console.log(response)
+                this.setState({
+                    // book: null
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            console.log(this.state.review_book)
+            console.log(this.state.review_content)
+    }
+
     render() {
         return (
             <div>
@@ -77,6 +94,7 @@ export default class Detail extends Component {
                         <p>Publishing Date: {this.props.book.publish}</p>
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
+                        
                         <hr />
                         {(this.props.book.review_book != null) ?
                             <div>
@@ -93,6 +111,7 @@ export default class Detail extends Component {
                                                 <button
                                                     onClick={() => this.editViewReview(review)}
                                                 >Edit</button>
+                                                <button onClick={() =>this.deleteReview(review.id)} >Delete</button>
                                             </div>
                                         )}
 
