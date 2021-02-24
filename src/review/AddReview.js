@@ -6,31 +6,21 @@ export default class AddReview extends Component {
         super(props)
 
         this.state = {
-            newBook: props.book,
+            theBook: props.book,
             review: "",
             newObj: {}
         }
 
-        console.log(props.book)
     }
 
     componentDidMount() {
         const updatedReview = this.state.newObj
 
-        updatedReview["book"] = this.state.newBook
+        updatedReview["book"] = this.state.theBook
     }
 
     handelSubmitReview = (event) => {
         console.log("we are sending review :)")
-        // console.log(this.state.newObj)
-        // {this.state.newObj}
-        // this.setState({
-        //     newObj: {
-        //         review: this.state.review,
-        //         book: this.state.newBook
-        //     }
-        // })
-        // console.log(this.state.newObj)
 
         this.props.addReview(this.state.newObj)
     }
@@ -51,15 +41,15 @@ export default class AddReview extends Component {
 
         console.log(this.state.newObj)
     }
-    
+
 
     render() {
         return (
             <div>
                 <Container >
                     <Form.Group >
-                        <Form.Label>Review</Form.Label>
-                        <Form.Control type="text" name="reviewContent" placeholder="Type" onChange={this.handleChangeReview} />
+                        <Form.Label>Add Review</Form.Label>
+                        <Form.Control type="text" name="reviewContent" placeholder="add review to the book" onChange={this.handleChangeReview} />
                         <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
                     </Form.Group>
                 </Container>
