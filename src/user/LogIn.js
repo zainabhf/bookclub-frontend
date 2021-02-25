@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 
-export default class LogIn extends Component {
+export default class Login extends Component {
     render() {
         return (
             <div>
