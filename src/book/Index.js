@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import Detail from './Detail';
 import AddBook from './AddBook';
 import EditBook from './EditBook';
-import { Card } from 'react-bootstrap';
+import { Card,Alert, Fade  } from 'react-bootstrap';
+import './Alert.css'
 
 export default class Index extends Component {
     constructor(props) {
@@ -12,7 +13,11 @@ export default class Index extends Component {
             books: [],
             book: null,
             isEdit: false,
-            isAdd: false
+            isAdd: false,
+            errorMessage: null,
+            successMessage: null,
+            visible : false
+          
         }
     }
     componentDidMount() {
@@ -77,12 +82,20 @@ export default class Index extends Component {
                 updatedBookList.push(response.data);
                 this.setState({
                     books: updatedBookList,
-                    isAdd: false
+                    isAdd: false,
+                    
+            successMessage: "The book added successfuly",
+            errorMessage:null
                 })
             })
             .catch(error => {
                 console.log("erroe in adding book");
                 console.log(error)
+                this.setState({
+                    errorMessage: "Ooops there somthing wrong try again later "+error,
+                   
+          
+                })
             })
     }
     editBook = (book) => {
@@ -91,12 +104,21 @@ export default class Index extends Component {
             .then(response => {
                 console.log("Edited!!")
                 console.log(response)
-                this.setState({ isEdit: !this.state.isEdit })
+                this.setState({
+                     isEdit: !this.state.isEdit ,
+            successMessage: "Book Edited successfuly ",
+           
+                })
                 this.loadBook()
             })
             .catch(error => {
                 console.log("Error Editing book");
                 console.log(error)
+                this.setState({
+                    errorMessage: "Ooops there something wrong "+error,
+                  
+           
+                })
             })
     }
 
@@ -114,17 +136,49 @@ export default class Index extends Component {
                 console.log(response)
                 this.loadBook()
                 this.setState({
-                    book: null
+                    book: null,
+               
+            successMessage: "The Book Deleted ",
+            errorMessage:null
+         
+           
                 })
             })
             .catch(error => {
                 console.log(error)
+                this.setState({
+                    errorMessage: "Try again later"+error,
+                    successMessage:""
+            
+                })
             })
     }
-
+    onShowAlert = ()=>{
+        this.setState({visible:true},()=>{
+          window.setTimeout(()=>{
+            this.setState({visible:false})
+          },2000)
+        });
+      }
+ 
     render() {
+      
+        const  successMessage=this.state.successMessage ?(
+           
+        
+            <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+           
+        ):null
+        const  errorMessage=this.state.errorMessage ?(
+            <Alert className="alert"  variant="danger">{this.state.errorMessage}</Alert>
+
+        ):null
         return (
+           
+
             <div>
+                 {successMessage}
+            {errorMessage}
                 <p onClick={this.viewAddBook}>Add Book</p>
                 <p onClick={() => this.backToIndex()} >Back to home</p>
                 {(this.state.isAdd === true) ?
