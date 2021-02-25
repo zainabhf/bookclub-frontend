@@ -15,8 +15,7 @@ export default class Index extends Component {
             isEdit: false,
             isAdd: false,
             errorMessage: null,
-            successMessage: null,
-            visible : false
+          
           
         }
     }
@@ -153,13 +152,7 @@ export default class Index extends Component {
                 })
             })
     }
-    onShowAlert = ()=>{
-        this.setState({visible:true},()=>{
-          window.setTimeout(()=>{
-            this.setState({visible:false})
-          },2000)
-        });
-      }
+
  
     render() {
       

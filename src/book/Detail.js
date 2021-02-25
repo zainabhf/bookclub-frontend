@@ -11,6 +11,8 @@ export default class Detail extends Component {
             review_content: {}, // to store the review when add, delete and edit the review
             isEditReview: false, // to show the form of editing the review
             reviewToBeEdited: null, // to save object of review while editing
+            errorMessage: null,
+            successMessage: null
         }
     }
     /*
@@ -40,13 +42,18 @@ export default class Detail extends Component {
         axios.post("/bookclub/review/add", review)
             .then(response => {
                 this.setState({
-                    review_content: this.state.review_book
+                    review_content: this.state.review_book,
+                    successMessage:"The review added Successfully"
                 })
                 this.loadReview()
             })
             .catch(error => {
                 console.log(" Error adding review ");
                 console.log(error);
+                this.setState({
+                    errorMessage:"OOps sorry try again later",
+                  
+                })
             })
     }
 
@@ -59,7 +66,8 @@ export default class Detail extends Component {
                 console.log("Add Review: - review of book ") // get from class book
                 console.log(review)
                 this.setState({
-                    review_content: this.state.review_book
+                    review_content: this.state.review_book,
+                    successMessage:"the review updeted Successfully"
                 })
                 this.submitEditReview()
                 this.loadReview()
@@ -67,6 +75,9 @@ export default class Detail extends Component {
             .catch(error => {
                 console.log(" Error adding review ");
                 console.log(error);
+                this.setState({
+                    errorMessage:"OOps somthing wrong please try again later"
+                })
             })
     }
 
@@ -77,9 +88,15 @@ export default class Detail extends Component {
                 console.log("Deleted!")
                 console.log(response)
                 this.loadReview()
+                this.setState({
+                    successMessage:"The review deleted Successfully"
+                })
             })
             .catch(error => {
                 console.log(error)
+                this.setState({
+                    errorMessage:"oops please try again later"
+                })
             })
         console.log(this.state.review_book)
         console.log(this.state.review_content)
@@ -105,8 +122,20 @@ export default class Detail extends Component {
 
 
     render() {
+        const  successMessage=this.state.successMessage ?(
+           
+        
+            <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+           
+        ):null
+        const  errorMessage=this.state.errorMessage ?(
+            <Alert className="alert"  variant="danger">{this.state.errorMessage}</Alert>
+
+        ):null
         return (
             <div>
+                {successMessage}
+            {errorMessage}
                 { (this.props.book != null) ?
                     <div>
                         <img src={this.props.book.image} alt="Book Cover" />
