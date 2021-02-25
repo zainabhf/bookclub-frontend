@@ -7,45 +7,52 @@ export default class Detail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            review_book: props.book.review_book,
-            review_content: {},
-            isEditReview: false,
-            reviewToBeEdited: null,
+            review_book: props.book.review_book, // to get review from class book (review_book)
+            review_content: {}, // to store the review when add, delete and edit the review
+            isEditReview: false, // to show the form of editing the review
+            reviewToBeEdited: null, // to save object of review while editing
         }
     }
+    /*
+     * set the state to show the form of editing the review
+     * and store the value of review to be edited
+     */
     editViewReview = (review) => {
         this.setState({
             isEditReview: true,
             reviewToBeEdited: review
         })
     }
-  submitEditReview = () => {
+    /**
+     * after editing the review and submiting, hide the form and 
+     * set the object of review to null (cleaning the object)
+     */
+    submitEditReview = () => {
         console.log("inside submit edit of review")
         this.setState({
             isEditReview: false,
             reviewToBeEdited: null
         })
     }
+
     addBookReview = (review) => {
         console.log("Book to be show")
         axios.post("/bookclub/review/add", review)
             .then(response => {
-                console.log("Add Review - response: ") // get from class review
-                console.log(response.data)
-                console.log("Add Review: - review of book ") // get from class book
-                console.log(review)
                 this.setState({
                     review_content: this.state.review_book
                 })
+                this.loadReview()
             })
             .catch(error => {
                 console.log(" Error adding review ");
                 console.log(error);
             })
     }
+
     editBookReview = (review) => {
         console.log("review is edited !")
-        axios.put(`/bookclub/review/edit?id=${review.id}` , review) 
+        axios.put(`/bookclub/review/edit?id=${review.id}`, review)
             .then(response => {
                 console.log("Add Review - response: ") // get from class review
                 console.log(response.data)
@@ -55,31 +62,47 @@ export default class Detail extends Component {
                     review_content: this.state.review_book
                 })
                 this.submitEditReview()
+                this.loadReview()
             })
             .catch(error => {
                 console.log(" Error adding review ");
                 console.log(error);
             })
-
-
-
     }
-    deleteReview = (id) => {
+
+    deleteReview = (review) => {
         axios
-            .delete(`/bookclub/review/delete?id=${id}`)
+            .delete(`/bookclub/review/delete?id=${review.id}`)
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
-                this.setState({
-                    // book: null
-                })
+                this.loadReview()
             })
             .catch(error => {
                 console.log(error)
             })
-            console.log(this.state.review_book)
-            console.log(this.state.review_content)
+        console.log(this.state.review_book)
+        console.log(this.state.review_content)
     }
+
+    loadReview = () => {
+        axios
+            .get(`/bookclub/book/detail?id=${this.props.book.id}`)
+            .then(response => {
+                console.log("load reviews of " + this.props.book.bookName + " book")
+                response.data.review_book.map((index) =>
+                    console.log(index.reviewContent))
+
+                this.setState({
+                    review_book: response.data.review_book
+                })
+            })
+            .catch(error => {
+                console.log("Error retreiving books !!");
+                console.log(error);
+            })
+    }
+
 
     render() {
         return (
@@ -94,24 +117,19 @@ export default class Detail extends Component {
                         <p>Publishing Date: {this.props.book.publish}</p>
                         <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
                         <button onClick={() => { this.props.editView() }}>Edit</button>
-                        
+
                         <hr />
                         {(this.props.book.review_book != null) ?
                             <div>
                                 {(this.state.isEditReview != true) ?
                                     <div>
-                                        {this.props.book.review_book.map((review, index) =>
+                                        {this.state.review_book.map((review, index) =>
                                             <div>
-                                                {console.log("ID of review : " + review.id)}
-                                                {console.log("Edit review ? " + this.state.isEditReview)}
-                                                {console.log("conetnt : " + review.reviewContent)}
-                                                {console.log("index : " + index)}
-                                                {console.log(this.state.reviewToBeEdited)}
                                                 <p>{review.reviewContent}</p>
                                                 <button
                                                     onClick={() => this.editViewReview(review)}
                                                 >Edit</button>
-                                                <button onClick={() =>this.deleteReview(review.id)} >Delete</button>
+                                                <button onClick={() => this.deleteReview(review)} >Delete</button>
                                             </div>
                                         )}
 
@@ -123,7 +141,7 @@ export default class Detail extends Component {
                                             book={this.props.book}
                                             // id={this.state.idOfReview}
                                             submitEditReview={this.submitEditReview}
-                                            reviewToBeEdited={this.state.reviewToBeEdited} editBookReview = {this.editBookReview} />
+                                            reviewToBeEdited={this.state.reviewToBeEdited} editBookReview={this.editBookReview} />
                                     </div>
                                 } </div>
                             :
