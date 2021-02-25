@@ -2,6 +2,9 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import AddReview from '../review/AddReview'
 import EditReview from '../review/EditReview'
+import { Card, Alert, Fade } from 'react-bootstrap';
+import './Alert.css'
+
 
 export default class Detail extends Component {
     constructor(props) {
@@ -43,7 +46,7 @@ export default class Detail extends Component {
             .then(response => {
                 this.setState({
                     review_content: this.state.review_book,
-                    successMessage:"The review added Successfully"
+                    successMessage: "The review added Successfully"
                 })
                 this.loadReview()
             })
@@ -51,8 +54,8 @@ export default class Detail extends Component {
                 console.log(" Error adding review ");
                 console.log(error);
                 this.setState({
-                    errorMessage:"OOps sorry try again later",
-                  
+                    errorMessage: "OOps sorry try again later",
+
                 })
             })
     }
@@ -67,7 +70,7 @@ export default class Detail extends Component {
                 console.log(review)
                 this.setState({
                     review_content: this.state.review_book,
-                    successMessage:"the review updeted Successfully"
+                    successMessage: "the review updeted Successfully"
                 })
                 this.submitEditReview()
                 this.loadReview()
@@ -76,7 +79,7 @@ export default class Detail extends Component {
                 console.log(" Error adding review ");
                 console.log(error);
                 this.setState({
-                    errorMessage:"OOps somthing wrong please try again later"
+                    errorMessage: "OOps somthing wrong please try again later"
                 })
             })
     }
@@ -89,13 +92,13 @@ export default class Detail extends Component {
                 console.log(response)
                 this.loadReview()
                 this.setState({
-                    successMessage:"The review deleted Successfully"
+                    successMessage: "The review deleted Successfully"
                 })
             })
             .catch(error => {
                 console.log(error)
                 this.setState({
-                    errorMessage:"oops please try again later"
+                    errorMessage: "oops please try again later"
                 })
             })
         console.log(this.state.review_book)
@@ -122,20 +125,20 @@ export default class Detail extends Component {
 
 
     render() {
-        const  successMessage=this.state.successMessage ?(
-           
-        
-            <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
-           
-        ):null
-        const  errorMessage=this.state.errorMessage ?(
-            <Alert className="alert"  variant="danger">{this.state.errorMessage}</Alert>
+        const successMessage = this.state.successMessage ? (
 
-        ):null
+
+            <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+
+        ) : null
+        const errorMessage = this.state.errorMessage ? (
+            <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
+
+        ) : null
         return (
             <div>
                 {successMessage}
-            {errorMessage}
+                {errorMessage}
                 { (this.props.book != null) ?
                     <div>
                         <img src={this.props.book.image} alt="Book Cover" />
