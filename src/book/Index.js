@@ -3,24 +3,27 @@ import React, { Component } from 'react'
 import Detail from './Detail';
 import AddBook from './AddBook';
 import EditBook from './EditBook';
-import { Card,Alert, Fade  } from 'react-bootstrap';
+import { Card, Alert, Fade } from 'react-bootstrap';
 import './Alert.css'
+import Home from '../Home'
 
 export default class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            books: [],
-            book: null,
-            isEdit: false,
-            isAdd: false,
+            books: props.books,
+            book: props.book,
+            isEdit: props.isEdit,
             errorMessage: null,
-          
-          
+            redirect: props.redirect,
+
         }
     }
     componentDidMount() {
         this.loadBook()
+        this.setState({
+            book: null
+        })
     }
     loadBook = () => {
         axios
@@ -30,8 +33,7 @@ export default class Index extends Component {
                 console.log(response)
                 this.setState({
                     books: response.data,
-                    book: null,
-                    isAdd: false,
+                    book: this.state.book,
 
                 })
 
@@ -48,7 +50,7 @@ export default class Index extends Component {
             .then(response => {
                 console.log(response)
                 this.setState({
-                    book: book
+                    book: book,
                 })
             })
             .catch(error => {
@@ -56,47 +58,7 @@ export default class Index extends Component {
                 console.log(error);
             })
     }
-    backToIndex() {
-        this.setState({
-            book: null,
-            isAdd: false,
-            isEdit: false
-        })
-    }
 
-    viewAddBook = () => {
-        this.setState({
-            isAdd: true,
-            book: null,
-            isEdit: false
-        })
-    }
-
-    addBook = (book) => {
-        axios
-            .post("/bookclub/book/add", book)
-            .then(response => {
-                console.log("book add sucssfully")
-                const updatedBookList = [...this.state.books];
-                updatedBookList.push(response.data);
-                this.setState({
-                    books: updatedBookList,
-                    isAdd: false,
-                    
-            successMessage: "The book added successfuly",
-            errorMessage:null
-                })
-            })
-            .catch(error => {
-                console.log("erroe in adding book");
-                console.log(error)
-                this.setState({
-                    errorMessage: "Ooops there somthing wrong try again later "+error,
-                   
-          
-                })
-            })
-    }
     editBook = (book) => {
         axios
             .put("/bookclub/book/edit", book)
@@ -104,9 +66,9 @@ export default class Index extends Component {
                 console.log("Edited!!")
                 console.log(response)
                 this.setState({
-                     isEdit: !this.state.isEdit ,
-            successMessage: "Book Edited successfuly ",
-           
+                    isEdit: !this.state.isEdit,
+                    successMessage: "Book Edited successfuly ",
+
                 })
                 this.loadBook()
             })
@@ -114,9 +76,7 @@ export default class Index extends Component {
                 console.log("Error Editing book");
                 console.log(error)
                 this.setState({
-                    errorMessage: "Ooops there something wrong "+error,
-                  
-           
+                    errorMessage: "Ooops there something wrong " + error,
                 })
             })
     }
@@ -136,56 +96,43 @@ export default class Index extends Component {
                 this.loadBook()
                 this.setState({
                     book: null,
-               
-            successMessage: "The Book Deleted ",
-            errorMessage:null
-         
-           
+
+                    successMessage: "The Book Deleted ",
+                    errorMessage: null
+
+
                 })
             })
             .catch(error => {
                 console.log(error)
                 this.setState({
-                    errorMessage: "Try again later"+error,
-                    successMessage:""
-            
+                    errorMessage: "Try again later" + error,
+                    successMessage: ""
+
                 })
             })
     }
 
- 
+
     render() {
-      
-        const  successMessage=this.state.successMessage ?(
-           
-        
+        const successMessage = this.state.successMessage ? (
             <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
-           
-        ):null
-        const  errorMessage=this.state.errorMessage ?(
-            <Alert className="alert"  variant="danger">{this.state.errorMessage}</Alert>
-
-        ):null
+        ) : null
+        const errorMessage = this.state.errorMessage ? (
+            <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
+        ) : null
         return (
-           
-
             <div>
-                 {successMessage}
-            {errorMessage}
-                <p onClick={this.viewAddBook}>Add Book</p>
-                <p onClick={() => this.backToIndex()} >Back to home</p>
-                {(this.state.isAdd === true) ?
+                {successMessage}
+                {errorMessage}
+                {(this.state.books != null) ?
                     <div>
-                        <AddBook addBook={this.addBook} />
-                    </div>
-                    :
-                    <div>
-                        {(this.state.books != null && this.state.book == null) ?
+                        {(this.state.book == null) ?
 
-                            <div className="row">
-                                {this.state.books.map((book, index) =>
+                            <div class="row">
+                                {this.state.books.map((book) =>
                                     <div onClick={() => this.handelDetail(book, book.id)}>
-                                        <Card style={{ width: '18rem' }} index={index} key={book.id}>
+                                        <Card style={{ width: '18rem' }} key={book.id}>
                                             <Card.Img variant="top" src={book.image} alt="Book image" />
                                             <Card.Body>
                                                 <Card.Title>{book.bookName}</Card.Title>
@@ -193,16 +140,19 @@ export default class Index extends Component {
                                         </Card>
                                     </div>
                                 )}
-                            </div> :
+                            </div>
+                            :
                             <div>
                                 {(this.state.isEdit === true) ?
-                                    <EditBook book={this.state.book} editBook={this.editBook} />
+                                    <EditBook book={this.state.book} editBook={this.editBook} key={this.state.book.id} />
                                     :
                                     <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} />
                                 }
                             </div>
                         }
                     </div>
+                    :
+                    <div>There're no books to show, add one !</div>
                 }
             </div>
         )

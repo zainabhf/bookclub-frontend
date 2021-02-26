@@ -4,7 +4,9 @@ import './App.css';
 import Index from './book/Index';
 import Home from './Home';
 import Login from './user/Login';
+import AddBook from './book/AddBook';
 import Register from './user/Register';
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
@@ -14,31 +16,36 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      user: {},
+      user: {}, // user information will be in this object when he login successfully
       isAuth: false,
       userToken: "",
-      redirect: ""
+      redirect: "",
+      book: null, // when clicking on some book, the details will be in this key..
+      isEdit: false,
+      books: []
     }
   }
 
   componentDidMount() {
-    let token = localStorage.getItem("token");
-
-    if (token != null) {
-      let user = decode(token);
-
-      if (user) {
-        this.setState({
-          isAuth: true,
-          user: user,
-        });
-      } else if (!user) {
-        localStorage.removeItem("token");
-        this.setState({
-          isAuth: false,
-        });
+    /*
+      let token = localStorage.getItem("token");
+  
+      if (token != null) {
+        let user = decode(token);
+  
+        if (user) {
+          this.setState({
+            isAuth: true,
+            user: user,
+          });
+        } else if (!user) {
+          localStorage.removeItem("token");
+          this.setState({
+            isAuth: false,
+          });
+        }
       }
-    }
+      */
   }
 
   login = (user) => {
@@ -95,31 +102,72 @@ export default class App extends Component {
         console.log(error);
       })
   }
+
+  addBook = (book) => {
+    axios
+      .post("/bookclub/book/add", book)
+      .then(response => {
+        console.log("book add sucssfully")
+        const updatedBookList = [...this.state.books];
+        updatedBookList.push(response.data);
+        this.setState({
+          books: updatedBookList,
+          redirect: './Index',
+          successMessage: "The book added successfuly",
+          errorMessage: null
+        })
+      })
+      .catch(error => {
+        console.log("erroe in adding book");
+        console.log(error)
+        this.setState({
+          errorMessage: "Ooops there somthing wrong try again later " + error,
+
+
+        })
+      })
+  }
+
+  backToBooks = () => {
+    this.setState({
+      book: null,
+    })
+
+  }
   render() {
+    console.log("Book state in App.js : " + this.state.book)
+
     return (
       <div >
         <nav>
           <Router>
+            {/* {Redirect user after registeration to login page..} */}
             <Redirect to={this.state.redirect} />
+
 
             <div>
               <Link to="/">Home</Link>{' '}
-              <Link to="/book/index">Books</Link>{' '}
-              {/* <Link to="user/profile">Profile</Link>{' '} */}
+              <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+              <Link to="/book/add" >Add Book</Link>{' '}
               <Link to="/user/login">Login</Link>{' '}
-              {/* <Link to="user/logout">Logout</Link>{' '} */}
               <Link to="/user/register">Register</Link>
+              {/* <Link to="user/profile">Profile</Link>{' '} */}
+              {/* <Link to="user/logout">Logout</Link>{' '} */}
             </div>
+
             <div>
               <Route exact path="/" component={Home} />
-              <Route path="/book/index" component={Index} />
-              {/* <Route path="user/profile" component={Profile} /> */}
+              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} />} />
+              <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
-              {/* <Route path="user/logout" component={Logout} /> */}
               <Route path="/user/register" component={() => <Register register={this.register} />} />
+              {/* <Route path="user/profile" component={Profile} /> */}
+              {/* <Route path="user/logout" component={Logout} /> */}
             </div>
+
           </Router>
         </nav>
+
       </div>
     )
   }
