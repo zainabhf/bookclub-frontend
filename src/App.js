@@ -6,6 +6,7 @@ import Home from './Home';
 import Login from './user/Login';
 import Register from './user/Register';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { decode } from "jsonwebtoken";
 
 export default class App extends Component {
   constructor(props) {
