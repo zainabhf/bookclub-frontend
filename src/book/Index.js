@@ -7,6 +7,7 @@ import { Card, Alert, Fade } from 'react-bootstrap';
 import './Alert.css'
 import Home from '../Home'
 
+
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -123,6 +124,7 @@ export default class Index extends Component {
         ) : null
         return (
             <div>
+               
                 {successMessage}
                 {errorMessage}
                 {(this.state.books != null) ?
