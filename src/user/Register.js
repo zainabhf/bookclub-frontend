@@ -9,74 +9,56 @@ export default class Register extends Component {
 
         this.state = {
             newUser: {},
-            isMatch:null,
-            messege:null
-            
+            messege: null
+
         }
     }
 
     registerHandler = () => {
-        if(this.checkPassword(this.state.newUser["password"],this.state.newUser["confirm"])){
-        this.props.register(this.state.newUser);
+        if (this.checkPassword(this.state.newUser["password"], this.state.newUser["confirm"])) {
+            this.props.register(this.state.newUser);
         }
-       else{
-           this.setState({
-               messege:"unmatch password"
-           })
-       }
+        else {
+            this.setState({
+                messege: "unmatch password"
+            })
+        }
     }
     changeHandler = (e) => {
 
-        let temp = {...this.state.newUser}
+        let temp = { ...this.state.newUser }
         temp[e.target.name] = e.target.value;
         temp["image"] = "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
         temp["userRole"] = "ROLE_USER"
 
-        // if (temp["password"] == temp["confirm"]) {
-        //     temp["password"] = e.target.value
-        // } else {
-        //     <Alert>
-        //         your password is not match !
-        //     </Alert>
-        // }
 
         this.setState({
 
             newUser: temp,
-            isMatch:this.checkPassword(this.state.newUser["password"],this.state.newUser["confirm"])
 
         })
         console.log(temp);
-        console.log(this.state.isMatch);
     }
-    checkPassword=(password,confirm)=>{
-        // const check={}
-        // check[e.target.name]=e.target.value
-    //   check["password"]=e.target.value
-    //   check["confirm"]=e.target.value
-    //   console.log(check["password"])
-    //   console.log(check["confirm"])
-// console.log(check["confirm"])
-// ("#confirm").val()
-      if(password== confirm){
-          return true
-      }else{
-          return false
-      }
+    checkPassword = (password, confirm) => {
+        if (password == confirm) {
+            return true
+        } else {
+            return false
+        }
 
     }
     render() {
-        
-        
-        const  successMessage=this.state.messege ?(
-           
-        
+
+
+        const successMessage = this.state.messege ? (
+
+
             <Alert className="alert" variant="danger"> {this.state.messege}</Alert>
-           
-        ):null
-      
+
+        ) : null
+
         return (
-            
+
             <div>
                 {successMessage}
                 <Alert variant="success">{this.state.messege}</Alert>
