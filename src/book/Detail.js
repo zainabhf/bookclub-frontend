@@ -166,7 +166,7 @@ export default class Detail extends Component {
                         />
 
                     </div>
-                    //in case book is null
+                    //in case book is null and detail won't be show (no book is selected !)
                     :
                     <h1>Nothing to show</h1>
                 }

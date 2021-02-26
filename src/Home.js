@@ -6,9 +6,9 @@ export default class Home extends Component {
       <div>
 
         <main>
-          <img src="" alt="landing page" />
+          {/* <img src="" alt="landing page" /> */}
         </main>
-        <p>It's Home page !</p>
+        <h3>It's Home page !</h3>
         <footer>
 
         </footer>

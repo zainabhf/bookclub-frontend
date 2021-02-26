@@ -45,7 +45,7 @@ export default class Review extends Component {
                     </div>
                     :
                     <div>
-                        <p>Be the first one who add's a review !</p>
+                        <p>Be the first one who add's a review about {this.props.book.bookName}!</p>
                     </div>
                 }
 

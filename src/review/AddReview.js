@@ -20,13 +20,11 @@ export default class AddReview extends Component {
         updatedReview["book"] = this.state.theBook
     }
 
-    handelSubmitReview = (event) => {
+    handelSubmitReview = () => {
 
-        console.log("we are sending review :)")
+        console.log("in method handel submit of review")
 
         this.props.addReview(this.state.newObj)
-        event.target.value = ""
-
     }
 
     handleChangeReview = (event) => {
@@ -38,13 +36,12 @@ export default class AddReview extends Component {
         review[attributeToChange] = newValue
 
 
-
-        console.log(review)
         this.setState({
-            newObj: review
+            newObj: review,
         })
 
-        console.log(this.state.newObj)
+        console.log(review) // value stored from form
+        console.log(this.state.newObj) // value to be stored from review..
     }
 
 
