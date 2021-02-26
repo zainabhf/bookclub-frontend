@@ -6,7 +6,6 @@ import Home from './Home';
 import Login from './user/Login';
 import AddBook from './book/AddBook';
 import Register from './user/Register';
-import Registe from './book/Index';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
