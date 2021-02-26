@@ -6,14 +6,16 @@ import Home from './Home';
 import Login from './user/Login';
 import Register from './user/Register';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { decode } from "jsonwebtoken";
+import { decode } from "jsonwebtoken";
+import { Redirect } from "react-router-dom";
 
 export default class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      user: {}
+      user: {},
+      redirect: ""
     }
   }
 
@@ -25,7 +27,8 @@ export default class App extends Component {
         console.log("user information in axios of registeration")
         console.log(user)
         this.setState({
-          user: user
+          user: user,
+          redirect: "./Login"
         })
       })
       .catch(error => {
@@ -38,6 +41,8 @@ export default class App extends Component {
       <div >
         <nav>
           <Router>
+            <Redirect to={this.state.redirect} />
+
             <div>
               <Link to="/">Home</Link>{' '}
               <Link to="/book/index">Books</Link>{' '}
