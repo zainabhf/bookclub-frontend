@@ -165,11 +165,6 @@ export default class Detail extends Component {
                             isEditReview={this.state.isEditReview}
                         />
 
-                            :
-                            <div>
-                            <p>No Book specified</p>
-                        </div>
-
                     </div>
                     //in case book is null
                     :
