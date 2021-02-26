@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import AddReview from '../review/AddReview'
-import EditReview from '../review/EditReview'
+// import AddReview from '../review/AddReview'
+// import EditReview from '../review/EditReview'
 import { Card, Alert, Fade } from 'react-bootstrap';
 import './Alert.css'
+import Review from '../review/Review';
 
 
 export default class Detail extends Component {
@@ -151,38 +152,21 @@ export default class Detail extends Component {
                         <button onClick={() => { this.props.editView() }}>Edit</button>
 
                         <hr />
-                        {(this.props.book.review_book != null) ?
-                            <div>
-                                {(this.state.isEditReview != true) ?
-                                    <div>
-                                        {this.state.review_book.map((review, index) =>
-                                            <div>
-                                                <p>{review.reviewContent}</p>
-                                                <button
-                                                    onClick={() => this.editViewReview(review)}
-                                                >Edit</button>
-                                                <button onClick={() => this.deleteReview(review)} >Delete</button>
-                                            </div>
-                                        )}
 
-                                    </div>
-                                    :
-                                    <div>
-                                        <EditReview
-                                            review_book={this.state.review_book}
-                                            book={this.props.book}
-                                            // id={this.state.idOfReview}
-                                            submitEditReview={this.submitEditReview}
-                                            reviewToBeEdited={this.state.reviewToBeEdited} editBookReview={this.editBookReview} />
-                                    </div>
-                                } </div>
-                            :
-                            <div></div>
-                        }
-                        <hr />
-                        <AddReview addReview={this.addBookReview} book={this.props.book} />
+                        <Review
+                            book={this.props.book}
+                            review_book={this.state.review_book}
+                            reviewToBeEdited={this.state.reviewToBeEdited}
+                            editBookReview={this.editBookReview}
+                            editViewReview={this.editViewReview}
+                            deleteReview={this.deleteReview}
+                            addReview={this.addBookReview}
+                            submitEditReview={this.submitEditReview}
+                            isEditReview={this.state.isEditReview}
+                        />
 
                     </div>
+                    //in case book is null
                     :
                     <h1>Nothing to show</h1>
                 }

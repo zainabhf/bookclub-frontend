@@ -8,7 +8,8 @@ export default class AddReview extends Component {
         this.state = {
             theBook: props.book,
             review: "",
-            newObj: {}
+            newObj: {},
+            emptyValue: ""
         }
 
     }
@@ -20,9 +21,12 @@ export default class AddReview extends Component {
     }
 
     handelSubmitReview = (event) => {
+
         console.log("we are sending review :)")
 
         this.props.addReview(this.state.newObj)
+        event.target.value = ""
+
     }
 
     handleChangeReview = (event) => {
@@ -32,6 +36,7 @@ export default class AddReview extends Component {
         const review = { ...this.state.newObj }
 
         review[attributeToChange] = newValue
+
 
 
         console.log(review)
