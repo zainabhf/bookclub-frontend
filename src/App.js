@@ -165,7 +165,7 @@ export default class App extends Component {
               <Link to="/user/login">Login</Link>{' '}
               <Link to="/user/register">Register</Link>{' '}
               {/* <Link to="user/profile">Profile</Link>{' '} */}
-              <Link to="user/logout" onClick={this.logout}>Logout</Link>{' '}
+              <Link onClick={this.logout}>Logout</Link>{' '}
             </div>
 
             <div>
