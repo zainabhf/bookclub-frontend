@@ -29,6 +29,7 @@ export default class Register extends Component {
             })
         }
     }
+    // test
     changeHandler = (e) => {
 
         let temp = { ...this.state.newUser }
