@@ -10,6 +10,8 @@ import Register from './user/Register';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
+import { Card, Alert, Fade } from 'react-bootstrap';
+import './book/Alert.css'
 
 export default class App extends Component {
   constructor(props) {
@@ -22,7 +24,9 @@ export default class App extends Component {
       redirect: "",
       book: null, // when clicking on some book, the details will be in this key..
       isEdit: false,
-      books: []
+      books: [],
+      successMessage:null,
+      errorMessage: null,
     }
   }
 
@@ -114,7 +118,7 @@ export default class App extends Component {
           books: updatedBookList,
           redirect: './Index',
           successMessage: "The book added successfuly",
-          errorMessage: null
+        
         })
       })
       .catch(error => {
@@ -136,9 +140,17 @@ export default class App extends Component {
   }
   render() {
     console.log("Book state in App.js : " + this.state.book)
+    const successMessage = this.state.successMessage ? (
+      <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+  ) : null
+  const errorMessage = this.state.errorMessage ? (
+      <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
+  ) : null
 
     return (
       <div >
+        {errorMessage}
+        {successMessage}
         <nav>
           <Router>
             {/* {Redirect user after registeration to login page..} */}
