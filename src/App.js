@@ -6,6 +6,7 @@ import Home from './Home';
 import Login from './user/Login';
 import AddBook from './book/AddBook';
 import Register from './user/Register';
+import Profile from './user/Profile';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
@@ -75,6 +76,7 @@ export default class App extends Component {
             // successMessage: "Successfully logged in!!!",
             // message: null
           });
+
         } else {
           this.setState({
             isAuth: false,
@@ -104,7 +106,6 @@ export default class App extends Component {
         console.log("user information in axios of registeration")
         console.log(user)
         this.setState({
-          // user: user,
           redirect: "./Login"
         })
       })
@@ -161,6 +162,26 @@ export default class App extends Component {
       redirect: '../'
     });
   };
+
+  profile = () => {
+    if (this.state.user != null) {
+      axios.get(`/bookclub/user/profile?id=${this.state.user.id}`)
+        .then(response => {
+          console.log(response.data)
+          this.setState({
+            user: response.data
+          })
+          console.log(this.state.user)
+
+        })
+        .catch(error => {
+          console.log(" Error profile ");
+          console.log(error);
+        })
+    }
+
+  }
+
   render() {
     const { isAuth } = this.state;
     console.log("Book state in App.js : " + this.state.book)
@@ -183,35 +204,35 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
-            {isAuth ? (
+            {(isAuth && this.state.user != null) ?
+              <div>
+                <Link to="/">Home</Link>{' '}
+                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+                <Link to="/book/add" >Add Book</Link>{' '}
+                <Link to="/user/profile">Profile</Link>{' '}
+                <Link to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
+              </div>
+
+              :
+
               <div>
                 < Link to="/">Home</Link>{' '}
                 <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link to="/book/add" >Add Book</Link>{' '}
-                <Link to="user/logout" onClick={this.logout}>Logout</Link>{' '}
-                {/* <Link to="user/profile">Profile</Link>{' '} */}
+
+                <Link to="/user/login">Login</Link>{' '}
+                <Link to="/user/register">Register</Link>{' '}
+
+
+
               </div>
-            ) :
-              (
-                <div>
-                  < Link to="/">Home</Link>{' '}
-                  <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-
-                  <Link to="/user/login">Login</Link>{' '}
-                  <Link to="/user/register">Register</Link>{' '}
-
-
-
-                </div>
-              )}
+            }
             <div>
               <Route exact path="/" component={Home} />
               <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} />} />
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />
-              {/* <Route path="user/profile" component={Profile} /> */}
-              {/* <Route path="user/logout" component={Logout} /> */}
+              <Route path="/user/profile" component={() => <Profile user={this.state.user} />} />
             </div>
 
           </Router>
