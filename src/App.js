@@ -18,7 +18,7 @@ export default class App extends Component {
     this.state = {
       user: {}, // user information will be in this object when he login successfully
       isAuth: false,
-      userToken: "",
+      userToken: "", // to store token when user is login
       redirect: "",
       book: null, // when clicking on some book, the details will be in this key..
       isEdit: false,
@@ -27,30 +27,33 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    /*
-      let token = localStorage.getItem("token");
-  
-      if (token != null) {
-        let user = decode(token);
-  
-        if (user) {
-          this.setState({
-            isAuth: true,
-            user: user,
-          });
-        } else if (!user) {
-          localStorage.removeItem("token");
-          this.setState({
-            isAuth: false,
-          });
-        }
+
+    let token = localStorage.getItem("token");
+
+    if (token != null) {
+      let user = decode(token);
+
+      if (user) {
+        this.setState({
+          isAuth: true,
+          user: user,
+        });
+      } else if (!user) {
+        localStorage.removeItem("token");
+        this.setState({
+          isAuth: false,
+        });
       }
-      */
+    }
+
+    console.log(this.state.user)
   }
+
+
 
   login = (user) => {
     axios
-      .post(`bookclub/user/authenticate`, user)
+      .post("/bookclub/user/authenticate", user)
       .then((response) => {
         console.log(response);
         console.log(response.data.token);
@@ -63,7 +66,8 @@ export default class App extends Component {
           this.setState({
             isAuth: true,
             user: user,
-            userToken: userToken
+            userToken: userToken,
+            redirect: './Home'
             // successMessage: "Successfully logged in!!!",
             // message: null
           });
@@ -83,6 +87,9 @@ export default class App extends Component {
           message: "Error Occured while login, please try again !",
         });
       });
+
+    console.log(this.state.user)
+
   }
 
   register = (user) => {
@@ -134,6 +141,12 @@ export default class App extends Component {
     })
 
   }
+
+  logout = () => {
+    this.setState({
+
+    })
+  }
   render() {
     console.log("Book state in App.js : " + this.state.book)
 
@@ -150,9 +163,9 @@ export default class App extends Component {
               <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
               <Link to="/book/add" >Add Book</Link>{' '}
               <Link to="/user/login">Login</Link>{' '}
-              <Link to="/user/register">Register</Link>
+              <Link to="/user/register">Register</Link>{' '}
               {/* <Link to="user/profile">Profile</Link>{' '} */}
-              {/* <Link to="user/logout">Logout</Link>{' '} */}
+              <Link to="user/logout" onClick={this.logout}>Logout</Link>{' '}
             </div>
 
             <div>
