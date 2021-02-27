@@ -143,8 +143,8 @@ export default class Index extends Component {
                         {(this.state.book == null) ?
 
                             <div class="row">
-                                {this.state.books.map((book) =>
-                                    <div onClick={() => this.handelDetail(book, book.id)}>
+                                {this.state.books.map((book ,index) =>
+                                    <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                         <Card style={{ width: '18rem' }} key={book.id}>
                                             <Card.Img variant="top" src={book.image} alt="Book image" />
                                             <Card.Body>

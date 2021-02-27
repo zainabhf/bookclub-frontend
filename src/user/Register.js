@@ -66,7 +66,7 @@ export default class Register extends Component {
             <div>
                 {errorMessage}
                 {successMessage}
-                <Alert variant="success">{this.state.messege}</Alert>
+              
 
                 <Container>
                     <Form.Group>
