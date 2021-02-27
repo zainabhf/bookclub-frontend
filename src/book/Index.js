@@ -7,6 +7,7 @@ import { Card, Alert, Fade } from 'react-bootstrap';
 import './Alert.css'
 import Home from '../Home'
 
+
 export default class Index extends Component {
     constructor(props) {
         super(props)
@@ -16,6 +17,7 @@ export default class Index extends Component {
             isEdit: props.isEdit,
             errorMessage: null,
             redirect: props.redirect,
+            successMessage:null
 
         }
     }
@@ -61,7 +63,12 @@ export default class Index extends Component {
 
     editBook = (book) => {
         axios
-            .put("/bookclub/book/edit", book)
+            .put("/bookclub/book/edit", book,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Edited!!")
                 console.log(response)
@@ -89,7 +96,12 @@ export default class Index extends Component {
 
     deleteBook = (id) => {
         axios
-            .delete(`/bookclub/book/delete?id=${id}`)
+            .delete(`/bookclub/book/delete?id=${id}`,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
@@ -98,7 +110,7 @@ export default class Index extends Component {
                     book: null,
 
                     successMessage: "The Book Deleted ",
-                    errorMessage: null
+                  
 
 
                 })
@@ -107,7 +119,7 @@ export default class Index extends Component {
                 console.log(error)
                 this.setState({
                     errorMessage: "Try again later" + error,
-                    successMessage: ""
+                   
 
                 })
             })
@@ -123,6 +135,7 @@ export default class Index extends Component {
         ) : null
         return (
             <div>
+               
                 {successMessage}
                 {errorMessage}
                 {(this.state.books != null) ?

@@ -43,7 +43,12 @@ export default class Detail extends Component {
 
     addBookReview = (review) => {
         console.log("Book to be show")
-        axios.post("/bookclub/review/add", review)
+        axios.post("/bookclub/review/add", review,
+        {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
             .then(response => {
                 this.setState({
                     review_content: this.state.review_book,
@@ -63,7 +68,12 @@ export default class Detail extends Component {
 
     editBookReview = (review) => {
         console.log("review is edited !")
-        axios.put(`/bookclub/review/edit?id=${review.id}`, review)
+        axios.put(`/bookclub/review/edit?id=${review.id}`, review,
+        {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
             .then(response => {
                 console.log("Add Review - response: ") // get from class review
                 console.log(response.data)
@@ -87,7 +97,12 @@ export default class Detail extends Component {
 
     deleteReview = (review) => {
         axios
-            .delete(`/bookclub/review/delete?id=${review.id}`)
+            .delete(`/bookclub/review/delete?id=${review.id}`,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)

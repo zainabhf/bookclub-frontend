@@ -10,6 +10,8 @@ import Register from './user/Register';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
+import { Card, Alert, Fade } from 'react-bootstrap';
+import './book/Alert.css'
 
 export default class App extends Component {
   constructor(props) {
@@ -22,7 +24,9 @@ export default class App extends Component {
       redirect: "",
       book: null, // when clicking on some book, the details will be in this key..
       isEdit: false,
-      books: []
+      books: [],
+      successMessage: null,
+      errorMessage: null,
     }
   }
 
@@ -67,7 +71,7 @@ export default class App extends Component {
             isAuth: true,
             user: user,
             userToken: userToken,
-            redirect: './Home'
+            redirect: '../'
             // successMessage: "Successfully logged in!!!",
             // message: null
           });
@@ -112,7 +116,12 @@ export default class App extends Component {
 
   addBook = (book) => {
     axios
-      .post("/bookclub/book/add", book)
+      .post("/bookclub/book/add", book,
+        {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+        })
       .then(response => {
         console.log("book add sucssfully")
         const updatedBookList = [...this.state.books];
@@ -121,7 +130,7 @@ export default class App extends Component {
           books: updatedBookList,
           redirect: './Index',
           successMessage: "The book added successfuly",
-          errorMessage: null
+
         })
       })
       .catch(error => {
@@ -142,32 +151,59 @@ export default class App extends Component {
 
   }
 
-  logout = () => {
+  logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
     this.setState({
-
-    })
-  }
+      isAuth: false,
+      user: null,
+      userToken: "",
+      redirect: '../'
+    });
+  };
   render() {
+    const { isAuth } = this.state;
     console.log("Book state in App.js : " + this.state.book)
+    const successMessage = this.state.successMessage ? (
+      <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+    ) : null
+    const errorMessage = this.state.errorMessage ? (
+      <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
+    ) : null
 
     return (
       <div >
+        {errorMessage}
+        {successMessage}
         <nav>
+
           <Router>
             {/* {Redirect user after registeration to login page..} */}
-            <Redirect to={this.state.redirect} />
-
-
             <div>
-              <Link to="/">Home</Link>{' '}
-              <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-              <Link to="/book/add" >Add Book</Link>{' '}
-              <Link to="/user/login">Login</Link>{' '}
-              <Link to="/user/register">Register</Link>{' '}
-              {/* <Link to="user/profile">Profile</Link>{' '} */}
-              <Link onClick={this.logout}>Logout</Link>{' '}
-            </div>
+              <Redirect to={this.state.redirect} />
 
+            </div>
+            {isAuth ? (
+              <div>
+                < Link to="/">Home</Link>{' '}
+                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+                <Link to="/book/add" >Add Book</Link>{' '}
+                <Link to="user/logout" onClick={this.logout}>Logout</Link>{' '}
+                {/* <Link to="user/profile">Profile</Link>{' '} */}
+              </div>
+            ) :
+              (
+                <div>
+                  < Link to="/">Home</Link>{' '}
+                  <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+
+                  <Link to="/user/login">Login</Link>{' '}
+                  <Link to="/user/register">Register</Link>{' '}
+
+
+
+                </div>
+              )}
             <div>
               <Route exact path="/" component={Home} />
               <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} />} />
