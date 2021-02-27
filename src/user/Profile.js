@@ -5,35 +5,19 @@ export default class Profile extends Component {
         super(props);
 
         this.state = {
-            user: {}
+            user: props.user
         };
     }
 
     componentDidMount() {
-       
-
-
     }
-    profile= () => {
-        axios.get(`/bookclub/user/profile?id=${user.id}`)
-        .then(response => {
-            console.log(response)
-            this.setState({
-                user: response.data
-            })
-        })
-        .catch(error => {
-            console.log(" Error profile ");
-            console.log(error);
-        })
 
-    }
     render() {
         return (
             <div>
-           
+                <p>Hi, I'm {this.state.user.name}</p>
             </div>
         )
     }
 }
- 
+
