@@ -9,7 +9,7 @@ export default class AddReview extends Component {
             theBook: props.book,
             review: "",
             newObj: {},
-            emptyValue: ""
+            reviewValue: ""
         }
 
     }
@@ -24,7 +24,11 @@ export default class AddReview extends Component {
 
         console.log("in method handel submit of review")
 
+        this.setState({
+            reviewValue: ""
+        })
         this.props.addReview(this.state.newObj)
+
     }
 
     handleChangeReview = (event) => {
@@ -37,6 +41,7 @@ export default class AddReview extends Component {
 
 
         this.setState({
+            reviewValue: event.target.reviewValue,
             newObj: review,
         })
 
@@ -51,7 +56,7 @@ export default class AddReview extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Add Review</Form.Label>
-                        <Form.Control type="text" name="reviewContent" placeholder="add review to the book" onChange={this.handleChangeReview} />
+                        <Form.Control type="text" name="reviewContent" value={this.state.reviewValue} placeholder="add review to the book" onChange={this.handleChangeReview} />
                         <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
                     </Form.Group>
                 </Container>
