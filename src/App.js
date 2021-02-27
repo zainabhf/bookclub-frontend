@@ -50,7 +50,7 @@ export default class App extends Component {
 
   login = (user) => {
     axios
-      .post("bookclub/user/authenticate", user)
+      .post(`bookclub/user/authenticate`, user)
       .then((response) => {
         console.log(response);
         console.log(response.data.token);
