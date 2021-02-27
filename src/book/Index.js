@@ -17,6 +17,7 @@ export default class Index extends Component {
             isEdit: props.isEdit,
             errorMessage: null,
             redirect: props.redirect,
+            successMessage:null
 
         }
     }
@@ -99,7 +100,7 @@ export default class Index extends Component {
                     book: null,
 
                     successMessage: "The Book Deleted ",
-                    errorMessage: null
+                  
 
 
                 })
@@ -108,7 +109,7 @@ export default class Index extends Component {
                 console.log(error)
                 this.setState({
                     errorMessage: "Try again later" + error,
-                    successMessage: ""
+                   
 
                 })
             })
