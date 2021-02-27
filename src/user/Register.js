@@ -9,7 +9,9 @@ export default class Register extends Component {
 
         this.state = {
             newUser: {},
-            messege: null
+            errorMessage: null,
+            successMessage:null
+
 
         }
     }
@@ -17,10 +19,13 @@ export default class Register extends Component {
     registerHandler = () => {
         if (this.checkPassword(this.state.newUser["password"], this.state.newUser["confirm"])) {
             this.props.register(this.state.newUser);
+            this.setState({
+                successMessage: "Welcome to our famile"
+            })
         }
         else {
             this.setState({
-                messege: "unmatch password"
+                errorMessage: "unmatch password"
             })
         }
     }
@@ -48,18 +53,17 @@ export default class Register extends Component {
 
     }
     render() {
-
-
-        const successMessage = this.state.messege ? (
-
-
-            <Alert className="alert" variant="danger"> {this.state.messege}</Alert>
-
+        const successMessage = this.state.successMessage ? (
+            <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
+        ) : null
+        const errorMessage = this.state.errorMessage ? (
+            <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
         ) : null
 
         return (
 
             <div>
+                {errorMessage}
                 {successMessage}
                 <Alert variant="success">{this.state.messege}</Alert>
 

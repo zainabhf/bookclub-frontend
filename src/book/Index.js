@@ -63,7 +63,12 @@ export default class Index extends Component {
 
     editBook = (book) => {
         axios
-            .put("/bookclub/book/edit", book)
+            .put("/bookclub/book/edit", book,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Edited!!")
                 console.log(response)
@@ -91,7 +96,12 @@ export default class Index extends Component {
 
     deleteBook = (id) => {
         axios
-            .delete(`/bookclub/book/delete?id=${id}`)
+            .delete(`/bookclub/book/delete?id=${id}`,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
