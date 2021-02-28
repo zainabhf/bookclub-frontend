@@ -44,11 +44,11 @@ export default class Detail extends Component {
     addBookReview = (review) => {
         console.log("Book to be show")
         axios.post("/bookclub/review/add", review,
-        {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 this.setState({
                     review_content: this.state.review_book,
@@ -69,11 +69,11 @@ export default class Detail extends Component {
     editBookReview = (review) => {
         console.log("review is edited !")
         axios.put(`/bookclub/review/edit?id=${review.id}`, review,
-        {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
             .then(response => {
                 console.log("Add Review - response: ") // get from class review
                 console.log(response.data)
@@ -98,11 +98,11 @@ export default class Detail extends Component {
     deleteReview = (review) => {
         axios
             .delete(`/bookclub/review/delete?id=${review.id}`,
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
+                {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                })
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
@@ -163,13 +163,26 @@ export default class Detail extends Component {
                         <p>{this.props.book.description}</p>
                         <p>Pages: {this.props.book.numberOfpages}</p>
                         <p>Publishing Date: {this.props.book.publish}</p>
-                        <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
-                        <button onClick={() => { this.props.editView() }}>Edit</button>
+                        {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
+                            <div>
+                                <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
+                            </div>
+                            :
+                            <div>
+                                {(this.props.user != null && this.props.user.userRole == "ROLE_USER") ?
+
+                                    <button onClick={() => { this.props.editView() }}>Edit</button>
+                                    :
+                                    <div></div>
+                                }
+                            </div>
+                        }
 
                         <hr />
 
                         <Review
                             book={this.props.book}
+                            user={this.props.user}
                             review_book={this.state.review_book}
                             reviewToBeEdited={this.state.reviewToBeEdited}
                             editBookReview={this.editBookReview}

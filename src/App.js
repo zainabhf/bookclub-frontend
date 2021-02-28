@@ -35,10 +35,13 @@ export default class App extends Component {
 
     let token = localStorage.getItem("token");
 
+
     if (token != null) {
       let user = decode(token);
 
       if (user) {
+        this.profile(user.sub)
+
         this.setState({
           isAuth: true,
           user: user,
@@ -67,15 +70,17 @@ export default class App extends Component {
         if (response.data.token != null) {
           localStorage.setItem("token", response.data.token);
           let userToken = decode(response.data.token);
-
           this.setState({
             isAuth: true,
             user: user,
             userToken: userToken,
-            redirect: '../'
+            redirect: './Profile'
             // successMessage: "Successfully logged in!!!",
             // message: null
           });
+
+          this.profile(user.emailAddress)
+
 
         } else {
           this.setState({
@@ -163,11 +168,13 @@ export default class App extends Component {
     });
   };
 
-  profile = () => {
+  profile = (emailAddress) => {
+    console.log("emailAddress")
+    console.log(emailAddress)
     if (this.state.user != null) {
-      axios.get(`/bookclub/user/profile?id=${this.state.user.id}`)
+      axios.get(`/bookclub/user/profile?emailAddress=${emailAddress}`)
         .then(response => {
-          console.log(response.data)
+          console.log("from function profile" + response.data)
           this.setState({
             user: response.data
           })
@@ -222,13 +229,11 @@ export default class App extends Component {
                 <Link to="/user/login">Login</Link>{' '}
                 <Link to="/user/register">Register</Link>{' '}
 
-
-
               </div>
             }
             <div>
               <Route exact path="/" component={Home} />
-              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} />} />
+              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} user={this.state.user} />} />
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />
