@@ -151,9 +151,9 @@ export default class Index extends Component {
                                      
                                         <Card className="card" style={{ width: '400px', height: "500px"}} key={book.id}>
                                             <Card.Img  style={{ width: '100%', height: "100%"}}variant="top" src={book.image} alt="Book image" />
-                                            <Card.Body >
-                                                <Card.Title style={{ width: '400px', height: "600px"}} >{book.bookName}</Card.Title>
-                                            </Card.Body>
+                                            
+                                                <Card.Title className="body-card" >{book.bookName}</Card.Title>
+                                            
                                         </Card>
                                         </div>
                                         
