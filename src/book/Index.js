@@ -86,7 +86,7 @@ export default class Index extends Component {
                 console.log("Error Editing book");
                 console.log(error)
                 this.setState({
-                    errorMessage: "Ooops there something wrong " + error,
+                  
                 })
             })
     }
@@ -149,11 +149,11 @@ export default class Index extends Component {
                                 {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                      
-                                        <Card id="card" style={{ width: '400x', height: "400px",background:"white" }} key={book.id}>
-                                            <Card.Img  style={{ width: '300px', height: "300px"}}variant="top" src={book.image} alt="Book image" />
-                                            <Card.Body style={{ background:"white"}}>
-                                                <Card.Title style ={{align: "center",background:"white"}}>{book.bookName}</Card.Title>
-                                            </Card.Body>
+                                        <Card className="card" style={{ width: '400px', height: "500px"}} key={book.id}>
+                                            <Card.Img  style={{ width: '100%', height: "100%"}}variant="top" src={book.image} alt="Book image" />
+                                            
+                                                <Card.Title className="body-card" >{book.bookName}</Card.Title>
+                                            
                                         </Card>
                                         </div>
                                         
