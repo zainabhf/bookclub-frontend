@@ -150,10 +150,10 @@ export default class Index extends Component {
                                 {this.state.books.map((book ,index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                         <div className="cardHover">
-                                        <Card  className="Card" style={{ width: '400x', height: "400px", }} key={book.id}>
+                                        <Card   style={{ width: '400x', height: "400px" }} key={book.id}>
                                             <Card.Img  style={{ width: '300px', height: "300px"}}variant="top" src={book.image} alt="Book image" />
-                                            <Card.Body>
-                                                <Card.Title>{book.bookName}</Card.Title>
+                                            <Card.Body style={{ width: '20x', height: "20px" }} >
+                                                <Card.Title >{book.bookName}</Card.Title>
                                             </Card.Body>
                                         </Card>
                                         </div>
