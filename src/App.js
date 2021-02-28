@@ -228,7 +228,7 @@ export default class App extends Component {
             }
             <div>
               <Route exact path="/" component={Home} />
-              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} />} />
+              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} user={this.state.user} />} />
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />

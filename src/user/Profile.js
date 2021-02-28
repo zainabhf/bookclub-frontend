@@ -13,6 +13,7 @@ export default class Profile extends Component {
     }
 
     render() {
+        console.log("in profile")
         return (
             <div>
                 <p>Hi, I'm {this.state.user.name}</p>
