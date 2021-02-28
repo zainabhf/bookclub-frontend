@@ -2,9 +2,10 @@ import axios from 'axios'
 import React, { Component } from 'react'
 // import AddReview from '../review/AddReview'
 // import EditReview from '../review/EditReview'
-import { Card, Alert, Fade } from 'react-bootstrap';
+import { Card, Alert, Fade, Container, Row, Col } from 'react-bootstrap';
 import './Alert.css'
 import Review from '../review/Review';
+import './BookStyle.css'
 
 
 export default class Detail extends Component {
@@ -157,10 +158,21 @@ export default class Detail extends Component {
                 {errorMessage}
                 { (this.props.book != null) ?
                     <div>
-                        <img src={this.props.book.image} alt="Book Cover" />
-                        <p>Title: {this.props.book.bookName}</p>
-                        <p>By: {this.props.book.authorName}</p>
-                        <p>{this.props.book.description}</p>
+                       
+                        <div className="row-detile">
+
+
+                            <img className="image-detile" src={this.props.book.image} alt="Book Cover" />
+                            <p className="book-title"> {this.props.book.bookName}</p><br/><br/>
+                            
+                           
+                        </div>
+                     
+                        <p className="book-descreption">{this.props.book.description}</p>
+
+
+                        <h4>Written By: {this.props.book.authorName}</h4>
+
                         <p>Pages: {this.props.book.numberOfpages}</p>
                         <p>Publishing Date: {this.props.book.publish}</p>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
