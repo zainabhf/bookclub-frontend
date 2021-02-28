@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import EditReview from '../review/EditReview'
 import AddReview from '../review/AddReview'
-
+import './reviewStyle.css'
 export default class Review extends Component {
 
     render() {
@@ -15,6 +15,11 @@ export default class Review extends Component {
                             <div>
                                 {this.props.review_book.map((review) =>
                                     <div>
+                                        <div class="test">
+                                        <div class="user-row">
+                                        <img class="review-img" src={review.user.image}  />
+                                        <p class="name">{review.user.name}</p>
+                                        </div>
                                         <p>{review.reviewContent}</p>
 
                                         {(this.props.user != null) ?
@@ -37,6 +42,7 @@ export default class Review extends Component {
                                         }
 
 
+                                    </div>
                                     </div>
                                 )
                                 }
