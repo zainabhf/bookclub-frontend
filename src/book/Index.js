@@ -150,9 +150,9 @@ export default class Index extends Component {
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                      
                                         <Card  className="card" style={{ width: '300px', height: "350px", backgroundColor:"#e2dfd5"}} key={book.id}>
-                                            <Card.Img  style={{ width: '100%', height: "100%"}}variant="top" src={book.image} alt="Book image" />
+                                            <Card.Img  style={{ width: '100%', height: "80%"}}variant="top" src={book.image} alt="Book image" />
                                             
-                                                <Card.Title className="body-card">{book.bookName}</Card.Title>
+                                                <div className="body-card"><h4>{book.bookName}</h4></div>
                                             
                                         </Card>
                                         </div>
