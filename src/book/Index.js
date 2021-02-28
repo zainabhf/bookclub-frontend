@@ -6,6 +6,7 @@ import EditBook from './EditBook';
 import { Card, Alert, Fade } from 'react-bootstrap';
 import './Alert.css'
 import Home from '../Home'
+import './BookStyle.css'
 
 
 export default class Index extends Component {
@@ -135,25 +136,33 @@ export default class Index extends Component {
         ) : null
         return (
             <div>
-               
+               <div>
                 {successMessage}
                 {errorMessage}
                 {(this.state.books != null) ?
                     <div>
                         {(this.state.book == null) ?
+                        
 
-                            <div class="row">
+                        <div class="row">
+                        
+                                
                                 {this.state.books.map((book ,index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
-                                        <Card style={{ width: '18rem' }} key={book.id}>
-                                            <Card.Img variant="top" src={book.image} alt="Book image" />
+                                        <div className="cardHover">
+                                        <Card  className="Card" style={{ width: '400x', height: "400px", }} key={book.id}>
+                                            <Card.Img  style={{ width: '300px', height: "300px"}}variant="top" src={book.image} alt="Book image" />
                                             <Card.Body>
                                                 <Card.Title>{book.bookName}</Card.Title>
                                             </Card.Body>
                                         </Card>
+                                        </div>
                                     </div>
                                 )}
+                               
                             </div>
+                            
+                            
                             :
                             <div>
                                 {(this.state.isEdit === true) ?
@@ -162,11 +171,14 @@ export default class Index extends Component {
                                     <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} />
                                 }
                             </div>
+                           
                         }
+                        
                     </div>
                     :
                     <div>There're no books to show, add one !</div>
                 }
+            </div>
             </div>
         )
     }
