@@ -22,12 +22,11 @@ export default class Index extends Component {
 
         }
     }
+
     componentDidMount() {
         this.loadBook()
-        this.setState({
-            book: null
-        })
     }
+
     loadBook = () => {
         axios
             .get("/bookclub/book/index")
@@ -46,6 +45,7 @@ export default class Index extends Component {
                 console.log(error);
             })
     }
+
     handelDetail(book, id) {
         console.log(book)
         axios
@@ -75,10 +75,12 @@ export default class Index extends Component {
                 console.log(response)
                 this.setState({
                     isEdit: !this.state.isEdit,
+                    book: book,
                     successMessage: "Book Edited successfuly ",
 
                 })
                 this.loadBook()
+                this.loadBookAfterEditing()
             })
             .catch(error => {
                 console.log("Error Editing book");
@@ -147,10 +149,10 @@ export default class Index extends Component {
                                 {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                      
-                                        <Card id="card" style={{ width: '400px', height: "400px",background:"white" }} key={book.id}>
-                                            <Card.Img  style={{ width: '300px', height: "300px"}}variant="top" src={book.image} alt="Book image" />
-                                            <Card.Body style={{ background:"white"}}>
-                                                <Card.Title style ={{align: "center",background:"white"}}>{book.bookName}</Card.Title>
+                                        <Card className="card" style={{ width: '400px', height: "500px"}} key={book.id}>
+                                            <Card.Img  style={{ width: '100%', height: "100%"}}variant="top" src={book.image} alt="Book image" />
+                                            <Card.Body >
+                                                <Card.Title style={{ width: '400px', height: "600px"}} >{book.bookName}</Card.Title>
                                             </Card.Body>
                                         </Card>
                                         </div>

@@ -5,10 +5,15 @@
     
     
 }
+.card{
+margin-top: 50px;
+margin-left: 20px;
+
+
+}
 
 
 
-
-#card:hover{
-    box-shadow: 30px 30px 30px rgb(71, 60, 50);
+.card:hover{
+    box-shadow: 5px 5px 10px rgb(71, 60, 50);
 }

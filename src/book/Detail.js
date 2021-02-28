@@ -165,13 +165,16 @@ export default class Detail extends Component {
                         <p>Publishing Date: {this.props.book.publish}</p>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
                             <div>
+                                <button onClick={() => { this.props.editView() }}>Edit</button>
                                 <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
+
                             </div>
                             :
                             <div>
                                 {(this.props.user != null && this.props.user.userRole == "ROLE_USER") ?
-
-                                    <button onClick={() => { this.props.editView() }}>Edit</button>
+                                    <div>
+                                        <button onClick={() => { this.props.editView() }}>Edit</button>
+                                    </div>
                                     :
                                     <div></div>
                                 }
