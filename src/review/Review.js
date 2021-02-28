@@ -23,10 +23,27 @@ export default class Review extends Component {
                                 {this.props.review_book.map((review) =>
                                     <div>
                                         <p>{review.reviewContent}</p>
-                                        <button
-                                            onClick={() => this.props.editViewReview(review)}
-                                        >Edit</button>
-                                        <button onClick={() => this.props.deleteReview(review)}>Delete</button>
+
+                                        {/* {(this.props.user != null) ? */}
+                                        <div>
+                                            {/* {((this.props.user.userRole == "ROLE_ADMIN") || (this.props.review.user != null && review.user.id == this.props.user.id)) ? */}
+                                            <div>
+                                                <button
+                                                    onClick={() => this.props.editViewReview(review)}
+                                                >Edit</button>
+                                                <button onClick={() => this.props.deleteReview(review)}>Delete</button>
+                                                {console.log(review)}
+                                            </div>
+                                            {/* : */}
+                                            <div></div>
+                                            {/* } */}
+                                        </div>
+
+                                        {/* : */}
+                                        <div></div>
+                                        {/* } */}
+
+
                                     </div>
                                 )
                                 }

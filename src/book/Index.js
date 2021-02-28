@@ -17,7 +17,7 @@ export default class Index extends Component {
             isEdit: props.isEdit,
             errorMessage: null,
             redirect: props.redirect,
-            successMessage:null
+            successMessage: null
 
         }
     }
@@ -64,11 +64,11 @@ export default class Index extends Component {
     editBook = (book) => {
         axios
             .put("/bookclub/book/edit", book,
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
+                {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                })
             .then(response => {
                 console.log("Edited!!")
                 console.log(response)
@@ -97,11 +97,11 @@ export default class Index extends Component {
     deleteBook = (id) => {
         axios
             .delete(`/bookclub/book/delete?id=${id}`,
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
+                {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                })
             .then(response => {
                 console.log("Deleted!")
                 console.log(response)
@@ -110,7 +110,7 @@ export default class Index extends Component {
                     book: null,
 
                     successMessage: "The Book Deleted ",
-                  
+
 
 
                 })
@@ -119,7 +119,7 @@ export default class Index extends Component {
                 console.log(error)
                 this.setState({
                     errorMessage: "Try again later" + error,
-                   
+
 
                 })
             })
@@ -135,7 +135,7 @@ export default class Index extends Component {
         ) : null
         return (
             <div>
-               
+
                 {successMessage}
                 {errorMessage}
                 {(this.state.books != null) ?
@@ -143,7 +143,7 @@ export default class Index extends Component {
                         {(this.state.book == null) ?
 
                             <div class="row">
-                                {this.state.books.map((book ,index) =>
+                                {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                         <Card style={{ width: '18rem' }} key={book.id}>
                                             <Card.Img variant="top" src={book.image} alt="Book image" />
@@ -159,7 +159,7 @@ export default class Index extends Component {
                                 {(this.state.isEdit === true) ?
                                     <EditBook book={this.state.book} editBook={this.editBook} key={this.state.book.id} />
                                     :
-                                    <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} />
+                                    <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} user={this.props.user} />
                                 }
                             </div>
                         }
