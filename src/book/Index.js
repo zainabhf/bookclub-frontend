@@ -110,11 +110,7 @@ export default class Index extends Component {
                 this.loadBook()
                 this.setState({
                     book: null,
-
                     successMessage: "The Book Deleted ",
-
-
-
                 })
             })
             .catch(error => {
