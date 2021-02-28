@@ -1,0 +1,14 @@
+
+*{
+    
+    background-color: #e2dfd5;
+    
+    
+}
+
+
+
+
+#card:hover{
+    box-shadow: 30px 30px 30px rgb(71, 60, 50);
+}
