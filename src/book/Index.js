@@ -146,15 +146,16 @@ export default class Index extends Component {
                             <div class="row">
                                 {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
-                                        <div className="cardHover">
-                                        <Card   style={{ width: '400x', height: "400px" }} key={book.id}>
+                                     
+                                        <Card id="card" style={{ width: '400x', height: "400px",background:"white" }} key={book.id}>
                                             <Card.Img  style={{ width: '300px', height: "300px"}}variant="top" src={book.image} alt="Book image" />
-                                            <Card.Body style={{ width: '20x', height: "20px" }} >
-                                                <Card.Title >{book.bookName}</Card.Title>
+                                            <Card.Body style={{ background:"white"}}>
+                                                <Card.Title style ={{align: "center",background:"white"}}>{book.bookName}</Card.Title>
                                             </Card.Body>
                                         </Card>
                                         </div>
-                                    </div>
+                                        
+                                   
                                 )}
                                
                             </div>

@@ -1,12 +1,14 @@
 
 *{
-    margin:10px 
+    
+    background-color: #e2dfd5;
+    
+    
 }
 
 
 
 
-
-Card:hover{
-    background-color: rgb(63, 48, 41);
+#card:hover{
+    box-shadow: 30px 30px 30px rgb(71, 60, 50);
 }
