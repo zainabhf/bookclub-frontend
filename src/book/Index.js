@@ -86,7 +86,7 @@ export default class Index extends Component {
                 console.log("Error Editing book");
                 console.log(error)
                 this.setState({
-                  
+
                 })
             })
     }
@@ -143,26 +143,25 @@ export default class Index extends Component {
                 {(this.state.books != null) ?
                     <div>
                         {(this.state.book == null) ?
-                        
+
 
                             <div class="row">
                                 {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
-                                     
-                                        <Card  className="card" style={{ width: '300px', height: "350px", backgroundColor:"#e2dfd5"}} key={book.id}>
-                                            <Card.Img  style={{ width: '100%', height: "80%"}}variant="top" src={book.image} alt="Book image" />
-                                            
-                                                <div className="body-card"><h4>{book.bookName}</h4></div>
-                                            
+
+                                        <Card className="card" key={book.id}>
+                                            <Card.Img style={{ width: '100%', height: "80%" }} variant="top" src={book.image} alt="Book image" />
+
+                                            <div className="body-card"><h4>{book.bookName}</h4></div>
                                         </Card>
-                                        </div>
-                                        
-                                   
+                                    </div>
+
+
                                 )}
-                               
+
                             </div>
-                            
-                            
+
+
                             :
                             <div>
                                 {(this.state.isEdit === true) ?
@@ -171,15 +170,15 @@ export default class Index extends Component {
                                     <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} user={this.props.user} />
                                 }
                             </div>
-                           
+
                         }
-                        
+
                     </div>
                     :
                     <div>There're no books to show, add one !</div>
                 }
             </div>
-           
+
         )
     }
 }

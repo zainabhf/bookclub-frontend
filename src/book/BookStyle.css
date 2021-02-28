@@ -13,10 +13,12 @@
 }
 .card{
 
-margin-bottom: 90px;
+margin-bottom:150px;
 margin-left: 20px;
-background-color:#e2dfd5;
 
+width:300px;
+ height: 350px;
+  
 border: 1px solid rgb(82, 79, 79);
 
 }
@@ -27,10 +29,11 @@ border: 1px solid rgb(82, 79, 79);
 .body-card{
     color:#1e212d;
      width: 300px;
-      height: 400px;
+      height: 500px;
+      padding: auto;
       border: 1px solid rgb(82, 79, 79);
       font-size:50px;
-      padding:5px;
+      padding:20px;
      text-align: center;
      margin-bottom: .1rem;
    
