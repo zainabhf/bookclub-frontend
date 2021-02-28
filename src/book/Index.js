@@ -22,12 +22,11 @@ export default class Index extends Component {
 
         }
     }
+
     componentDidMount() {
         this.loadBook()
-        this.setState({
-            book: null
-        })
     }
+
     loadBook = () => {
         axios
             .get("/bookclub/book/index")
@@ -46,6 +45,7 @@ export default class Index extends Component {
                 console.log(error);
             })
     }
+
     handelDetail(book, id) {
         console.log(book)
         axios
@@ -75,10 +75,12 @@ export default class Index extends Component {
                 console.log(response)
                 this.setState({
                     isEdit: !this.state.isEdit,
+                    book: book,
                     successMessage: "Book Edited successfuly ",
 
                 })
                 this.loadBook()
+                this.loadBookAfterEditing()
             })
             .catch(error => {
                 console.log("Error Editing book");
