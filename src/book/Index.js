@@ -137,7 +137,7 @@ export default class Index extends Component {
             <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
         ) : null
         return (
-            <div>
+            <div className="connitner">
                 {successMessage}
                 {errorMessage}
                 {(this.state.books != null) ?
@@ -149,10 +149,10 @@ export default class Index extends Component {
                                 {this.state.books.map((book, index) =>
                                     <div key={index} onClick={() => this.handelDetail(book, book.id)}>
                                      
-                                        <Card className="card" style={{ width: '400px', height: "500px"}} key={book.id}>
+                                        <Card  className="card" style={{ width: '300px', height: "350px", backgroundColor:"#e2dfd5"}} key={book.id}>
                                             <Card.Img  style={{ width: '100%', height: "100%"}}variant="top" src={book.image} alt="Book image" />
                                             
-                                                <Card.Title className="body-card" >{book.bookName}</Card.Title>
+                                                <Card.Title className="body-card">{book.bookName}</Card.Title>
                                             
                                         </Card>
                                         </div>
