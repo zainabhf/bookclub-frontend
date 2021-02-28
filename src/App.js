@@ -53,9 +53,6 @@ export default class App extends Component {
 
     console.log(this.state.user)
   }
-
-
-
   login = (user) => {
     axios
       .post("/bookclub/user/authenticate", user)
