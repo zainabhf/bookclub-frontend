@@ -9,7 +9,8 @@ export default class AddReview extends Component {
             theBook: props.book,
             review: "",
             newObj: {},
-            reviewValue: ""
+            reviewValue: "",
+            user: props.user
         }
 
     }
@@ -18,6 +19,7 @@ export default class AddReview extends Component {
         const updatedReview = this.state.newObj
 
         updatedReview["book"] = this.state.theBook
+        updatedReview["user"] = this.state.user
     }
 
     handelSubmitReview = () => {
