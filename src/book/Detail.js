@@ -164,11 +164,19 @@ export default class Detail extends Component {
                         <p>Pages: {this.props.book.numberOfpages}</p>
                         <p>Publishing Date: {this.props.book.publish}</p>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
-                            <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
+                            <div>
+                                <button onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</button>
+                            </div>
                             :
-                            <div></div>
+                            <div>
+                                {(this.props.user != null && this.props.user.userRole == "ROLE_USER") ?
+
+                                    <button onClick={() => { this.props.editView() }}>Edit</button>
+                                    :
+                                    <div></div>
+                                }
+                            </div>
                         }
-                        <button onClick={() => { this.props.editView() }}>Edit</button>
 
                         <hr />
 
@@ -183,7 +191,6 @@ export default class Detail extends Component {
                             addReview={this.addBookReview}
                             submitEditReview={this.submitEditReview}
                             isEditReview={this.state.isEditReview}
-
                         />
 
                     </div>
