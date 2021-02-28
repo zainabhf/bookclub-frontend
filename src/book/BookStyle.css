@@ -13,7 +13,7 @@ border: 1px solid rgb(82, 79, 79);
 }
 
 .card:hover{
-    box-shadow: 5px 5px 10px #b8957b;
+    box-shadow: 5px 5px 20px #b8957b;
 }
 .body-card{
     color:#1e212d;

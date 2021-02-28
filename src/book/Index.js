@@ -86,7 +86,7 @@ export default class Index extends Component {
                 console.log("Error Editing book");
                 console.log(error)
                 this.setState({
-                    errorMessage: "Ooops there something wrong " + error,
+                  
                 })
             })
     }
