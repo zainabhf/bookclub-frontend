@@ -1,0 +1,30 @@
+body{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color:#fff;
+}
+
+.container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    width:100%;
+}
+h1{
+  color:#fff;
+}
+
+ .form-box{
+      width:480px;
+      height:450px;
+      padding:20px;
+      border-radius:2%;
+  } 
+
+
+.header-form >h1 ,.form-box,.body-form > form > .input-group{
+  margin-bottom:15px;
+  background-color:#b68973;
+}
