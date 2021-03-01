@@ -158,23 +158,25 @@ export default class Detail extends Component {
                 {errorMessage}
                 { (this.props.book != null) ?
                     <div>
-                       
+
                         <div className="row-detile">
 
 
                             <img className="image-detile" src={this.props.book.image} alt="Book Cover" />
-                            <p className="book-title"> {this.props.book.bookName}</p><br/><br/>
-                            
-                           
+                            <p className="book-title"> {this.props.book.bookName}</p><br /><br />
+
+
                         </div>
-                     
-                        <p className="book-descreption">{this.props.book.description}</p>
+
+                        <p className="book-descreption">Description:  {this.props.book.description}</p>
 
 
-                        <h4>Written By: {this.props.book.authorName}</h4>
-
-                        <p>Pages: {this.props.book.numberOfpages}</p>
-                        <p>Publishing Date: {this.props.book.publish}</p>
+                        <h4 className="book-author">Written By: {this.props.book.authorName}</h4>
+                        <hr/>
+                        <div className="book-date">
+                            <p >Pages: {this.props.book.numberOfpages}</p>
+                            <p >Publishing Date: {this.props.book.publish}</p>
+                        </div>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
                             <div>
                                 <button onClick={() => { this.props.editView() }}>Edit</button>
