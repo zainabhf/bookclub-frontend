@@ -190,7 +190,7 @@ export default class App extends Component {
   updateProfile = (user) => {
     console.log(user)
     if (this.state.user != null) {
-      axios.post(`/bookclub/user/updateUserInfo?id=${user.id}`, user)
+      axios.post(`/bookclub/user/updateUserInfo?id=${user.emailAddress}`, user)
         .then(response => {
           console.log("from function updateProfile")
           console.log(response)
@@ -213,11 +213,14 @@ export default class App extends Component {
   }
 
   updatePassword = (user) => {
-    axios.post(`/bookclub/user/updatePassword?id=${user.id}`, user)
+    axios.put(`/bookclub/user/updatePassword?emailAddress=${user.emailAddress}`, user)
       .then(response => {
         console.log("from function updatePassword")
         console.log(response)
         console.log(user)
+        this.setState({
+          user: user
+        })
       })
       .catch(error => {
         this.setState({
@@ -260,16 +263,12 @@ export default class App extends Component {
                 <Link to="/user/profile">Profile</Link>{' '}
                 <Link to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
               </div>
-
               :
-
               <div>
                 < Link to="/">Home</Link>{' '}
                 <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-
                 <Link to="/user/login">Login</Link>{' '}
                 <Link to="/user/register">Register</Link>{' '}
-
               </div>
             }
             <div>
@@ -278,7 +277,7 @@ export default class App extends Component {
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />
-              <Route path="/user/profile" component={() => <Profile user={this.state.user} updateProfile={this.updateProfile} successMessage={this.state.successMessage} updatePassword={this.updatePassword} />} />
+              <Route path="/user/profile" component={() => <Profile user={this.state.user} updateProfile={this.updateProfile} successMessage={this.state.successMessage} updatePassword={this.updatePassword} userToken={this.state.userToken} />} />
             </div>
 
           </Router>
