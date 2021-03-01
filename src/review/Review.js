@@ -3,13 +3,6 @@ import EditReview from '../review/EditReview'
 import AddReview from '../review/AddReview'
 import './reviewStyle.css'
 export default class Review extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-
-        }
-    }
 
     render() {
         { console.log(this.props.review_book) }
@@ -33,10 +26,9 @@ export default class Review extends Component {
                                             <div>
                                                 {((this.props.user.userRole == "ROLE_ADMIN") || (review.user != null && review.user.id == this.props.user.id)) ?
                                                     <div>
-                                                        <button
-                                                            onClick={() => this.props.editViewReview(review)}
-                                                        >Edit</button>
+                                                        <button onClick={() => this.props.editViewReview(review)}>Edit</button>
                                                         <button onClick={() => this.props.deleteReview(review)}>Delete</button>
+                                                        {console.log(review)}
                                                         {console.log(review.user.name)}
                                                         {console.log(review.user.id)}
                                                     </div>
@@ -74,7 +66,11 @@ export default class Review extends Component {
                 }
 
                 <hr />
-                <AddReview addReview={this.props.addReview} book={this.props.book} user={this.props.user} />
+                {(this.props.user != null) ?
+                    <AddReview addReview={this.props.addReview} book={this.props.book} user={this.props.user} />
+                    :
+                    <div></div>
+                }
 
             </div >
 
