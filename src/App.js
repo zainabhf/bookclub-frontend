@@ -75,8 +75,8 @@ export default class App extends Component {
             isAuth: true,
             user: user,
             userToken: userToken,
-            redirect: './Profile'
-            // successMessage: "Successfully logged in!!!",
+            redirect: './Profile',
+            successMessage: "Successfully logged in!!!",
             // message: null
           });
 
@@ -88,7 +88,7 @@ export default class App extends Component {
             isAuth: false,
             userToken: null,
             user: {},
-            // message: "Incorrect username or password",
+            errorMessage: "Incorrect username or password",
           });
         }
       })
@@ -96,7 +96,7 @@ export default class App extends Component {
         console.log(error);
         this.setState({
           isAuth: false,
-          message: "Error Occured while login, please try again !",
+          errorMessage: "Error Occured while login, please try again !",
         });
       });
 
@@ -165,7 +165,8 @@ export default class App extends Component {
       isAuth: false,
       user: null,
       userToken: "",
-      redirect: '../'
+      redirect: '../',
+      successMessage:"Bye Bye See you Later"
     });
   };
 
@@ -193,20 +194,20 @@ export default class App extends Component {
   updateProfile = (user) => {
     console.log(user)
     if (this.state.user != null) {
-      axios.post(`/bookclub/user/updateUserInfo?id=${user.emailAddress}`, user)
+      axios.post(`/bookclub/user/updateUserInfo?emailAddress=${user.emailAddress}`, user)
         .then(response => {
           console.log("from function updateProfile")
           console.log(response)
           this.setState({
             user: user,
-            successMessage: 'Profile updated successfully !'
+          
           })
           console.log(this.state.user)
 
         })
         .catch(error => {
           this.setState({
-            errorMessage: "Oops ! something went wrong while updating profile"
+            // errorMessage: "Oops ! something went wrong while updating profile"
           })
           console.log(" Error profile ");
           console.log(error);

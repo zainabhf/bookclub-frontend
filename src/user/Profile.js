@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Button, Container, Form, Col, Row } from 'react-bootstrap'
 import { Alert } from 'react-bootstrap';
-
+import '../book/Alert.css'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -46,6 +46,7 @@ export default class Profile extends Component {
         this.setState({
             isEdit: false,
             isClick: false,
+              successMessage: 'Profile updated successfully !'
         })
         this.props.updateProfile(this.state.user)
     }
@@ -105,13 +106,16 @@ export default class Profile extends Component {
     render() {
         const successMessage = this.state.successMessage ? (
             <Alert className="alert" variant="success"> {this.state.successMessage}</Alert>
-        ) : null
-        const errorMessage = this.state.errorMessage ? (
+          ) : null
+          const errorMessage = this.state.errorMessage ? (
             <Alert className="alert" variant="danger">{this.state.errorMessage}</Alert>
-        ) : null
-        return (
-            <div>
-
+          ) : null
+      
+          return (
+            <div >
+              {errorMessage}
+              {successMessage}
+ 
                 {(this.props.userToken != "") ?
                     <div>
                         {(this.state.isClick != true) ?
