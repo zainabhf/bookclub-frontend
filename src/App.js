@@ -7,13 +7,13 @@ import Login from './user/Login';
 import AddBook from './book/AddBook';
 import Register from './user/Register';
 import Profile from './user/Profile';
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
 import { Card, Alert, Fade } from 'react-bootstrap';
 import './book/Alert.css'
-
+import './NavBar.css'
+// import '../public/book-club.png'
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -57,9 +57,6 @@ export default class App extends Component {
 
     console.log(this.state.user)
   }
-
-
-
   login = (user) => {
     axios
       .post("/bookclub/user/authenticate", user)
@@ -75,8 +72,8 @@ export default class App extends Component {
             isAuth: true,
             user: user,
             userToken: userToken,
-            redirect: './Profile'
-            // successMessage: "Successfully logged in!!!",
+            redirect: './Profile',
+            successMessage: "Successfully logged in!!!",
             // message: null
           });
 
@@ -88,7 +85,7 @@ export default class App extends Component {
             isAuth: false,
             userToken: null,
             user: {},
-            // message: "Incorrect username or password",
+            errorMessage: "Incorrect username or password",
           });
         }
       })
@@ -96,7 +93,7 @@ export default class App extends Component {
         console.log(error);
         this.setState({
           isAuth: false,
-          message: "Error Occured while login, please try again !",
+          errorMessage: "Error Occured while login, please try again !",
         });
       });
 
@@ -165,7 +162,8 @@ export default class App extends Component {
       isAuth: false,
       user: null,
       userToken: "",
-      redirect: '../'
+      redirect: '../',
+      successMessage:"Bye Bye See you Later"
     });
   };
 
@@ -193,20 +191,20 @@ export default class App extends Component {
   updateProfile = (user) => {
     console.log(user)
     if (this.state.user != null) {
-      axios.post(`/bookclub/user/updateUserInfo?id=${user.emailAddress}`, user)
+      axios.post(`/bookclub/user/updateUserInfo?emailAddress=${user.emailAddress}`, user)
         .then(response => {
           console.log("from function updateProfile")
           console.log(response)
           this.setState({
             user: user,
-            successMessage: 'Profile updated successfully !'
+          
           })
           console.log(this.state.user)
 
         })
         .catch(error => {
           this.setState({
-            errorMessage: "Oops ! something went wrong while updating profile"
+            // errorMessage: "Oops ! something went wrong while updating profile"
           })
           console.log(" Error profile ");
           console.log(error);
@@ -227,7 +225,7 @@ export default class App extends Component {
       })
       .catch(error => {
         this.setState({
-          errorMessage: "Oops ! something went wrong while updating profile"
+          // errorMessage: "Oops ! something went wrong while updating profile"
 
         })
         console.log(" Error while updating the password ");
@@ -258,20 +256,21 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
+            <div className="row"> <img style={{margin:"10px"}} src="./public/book-club.png"/><h1 style={{margin:"5px"}}>Book Club </h1></div>
             {(isAuth && this.state.user != null) ?
-              <div>
-                <Link to="/">Home</Link>{' '}
-                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link to="/book/add" >Add Book</Link>{' '}
-                <Link to="/user/profile">Profile</Link>{' '}
-                <Link to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
+              <div className="nav-bar">
+                <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
+                <Link  className="link" to="/book/add" > <i class="fa fa-plus-square-o"></i> New Book</Link>{' '}
+                <Link className="link" to="/user/profile"> <i class="fa fa-address-card-o"></i> Profile</Link>{' '}
+                <Link  className="link" to="/user/logout" onClick={this.logout}> <i class="fa fa-sign-out"></i> Logout</Link>{' '}
               </div>
               :
-              <div>
-                < Link to="/">Home</Link>{' '}
-                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link to="/user/login">Login</Link>{' '}
-                <Link to="/user/register">Register</Link>{' '}
+              <div className="nav-bar">
+                < Link className="link" to="/"> <i class="fa fa-home"></i>Home</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
+                <Link  className="link" to="/user/login"> <i class="fa fa-sign-in"></i> Login</Link>{' '}
+                <Link className="link" to="/user/register"> <i class="fa fa-user-plus"></i> Register</Link>{' '}
               </div>
             }
             <div>

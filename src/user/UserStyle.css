@@ -1,0 +1,33 @@
+body{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color:#fff;
+}
+
+.container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    width:100%;
+}
+ .form-box{
+      width:480px;
+      height:350px;
+      padding:20px;
+      border-radius:2%;
+  } 
+
+
+.form-box,.body-form > form > .input-group{
+  margin-bottom:15px;
+  border: 2px solid #b68973;
+  background-color: #f0f0f0;
+}
+.header-form >h1 {
+color: #000;
+background-color: #f0f0f0;
+font-size:37px;
+padding-bottom: 15px;
+}
