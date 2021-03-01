@@ -46,6 +46,7 @@ export default class App extends Component {
           isAuth: true,
           user: user,
         });
+        this.updateProfile(user)
       } else if (!user) {
         localStorage.removeItem("token");
         this.setState({
@@ -186,6 +187,49 @@ export default class App extends Component {
 
   }
 
+  updateProfile = (user) => {
+    console.log(user)
+    if (this.state.user != null) {
+      axios.post(`/bookclub/user/updateUserInfo?id=${user.id}`, user)
+        .then(response => {
+          console.log("from function updateProfile")
+          console.log(response)
+          this.setState({
+            user: user,
+            successMessage: 'Profile updated successfully !'
+          })
+          console.log(this.state.user)
+
+        })
+        .catch(error => {
+          this.setState({
+            errorMessage: "Oops ! something went wrong while updating profile"
+          })
+          console.log(" Error profile ");
+          console.log(error);
+        })
+    }
+
+  }
+
+  updatePassword = (user) => {
+    axios.post(`/bookclub/user/updatePassword?id=${user.id}`, user)
+      .then(response => {
+        console.log("from function updatePassword")
+        console.log(response)
+        console.log(user)
+      })
+      .catch(error => {
+        this.setState({
+          errorMessage: "Oops ! something went wrong while updating profile"
+
+        })
+        console.log(" Error while updating the password ");
+        console.log(error);
+      })
+
+  }
+
   render() {
     const { isAuth } = this.state;
     console.log("Book state in App.js : " + this.state.book)
@@ -234,7 +278,7 @@ export default class App extends Component {
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />
-              <Route path="/user/profile" component={() => <Profile user={this.state.user} />} />
+              <Route path="/user/profile" component={() => <Profile user={this.state.user} updateProfile={this.updateProfile} successMessage={this.state.successMessage} updatePassword={this.updatePassword} />} />
             </div>
 
           </Router>

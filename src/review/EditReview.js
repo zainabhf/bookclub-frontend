@@ -41,12 +41,9 @@ export default class EditReview extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Edit Your Review</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="reviewContent"
-                            value={this.state.review_content.reviewContent}
-                            onChange={this.handelOnChange}
-                        />
+                        <br />
+                        <textarea type="text" cols="90" rows="10" name="reviewContent" value={this.state.review_content.reviewContent} onChange={this.handelOnChange} ></textarea>
+                        <br />
                         <Button variant="primary" onClick={this.handelSubmit}>Submit</Button>
                     </Form.Group>
                 </Container>
@@ -56,3 +53,4 @@ export default class EditReview extends Component {
         )
     }
 }
+

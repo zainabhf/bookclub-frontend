@@ -58,7 +58,10 @@ export default class AddReview extends Component {
                 <Container >
                     <Form.Group >
                         <Form.Label>Add Review</Form.Label>
-                        <Form.Control type="text" name="reviewContent" value={this.state.reviewValue} placeholder="add review to the book" onChange={this.handleChangeReview} />
+                        <br />
+                        <textarea type="text" rows="10" cols="90" name="reviewContent" value={this.state.reviewValue} placeholder="add review to the book" onChange={this.handleChangeReview}></textarea>
+                        <br />
+
                         <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
                     </Form.Group>
                 </Container>
