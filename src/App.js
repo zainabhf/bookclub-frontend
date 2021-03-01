@@ -13,7 +13,7 @@ import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
 import { Card, Alert, Fade } from 'react-bootstrap';
 import './book/Alert.css'
-
+import './NavBar.css'
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -260,12 +260,12 @@ export default class App extends Component {
 
             </div>
             {(isAuth && this.state.user != null) ?
-              <div>
-                <Link to="/">Home</Link>{' '}
-                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link to="/book/add" >Add Book</Link>{' '}
-                <Link to="/user/profile">Profile</Link>{' '}
-                <Link to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
+              <div className="nav-bar">
+                <Link className="link" to="/">Home</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+                <Link  className="link" to="/book/add" >Add Book</Link>{' '}
+                <Link className="link" to="/user/profile">Profile</Link>{' '}
+                <Link  className="link" to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
               </div>
               :
               <div>
