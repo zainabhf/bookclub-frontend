@@ -1,6 +1,7 @@
 
-import React, { Component } from 'react'
-import { Container, Form, Button, Alert } from 'react-bootstrap'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 export default class Login extends Component {
 
@@ -38,8 +39,7 @@ export default class Login extends Component {
 
             <div>
 
-                <Container>
-
+            <Container>
                     <Form.Group>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control type="email" name="emailAddress" onChange={this.changeHandler}></Form.Control>
@@ -53,8 +53,45 @@ export default class Login extends Component {
 
                     <Button variant="primary" block onClick={this.loginHandler}>Login</Button>
                 </Container>
-
             </div>
+
+//   <div className="container">
+//                 <div className="form-box">
+//                     <div className="header-form">
+//                         <h1> Login </h1>
+//                         {/* <div className="image">
+//                         </div> */}
+//                     </div>
+//                     <div className="body-form">
+
+//                         <form>
+//                             <div className="input-group mb-3">
+//                                 <div className="input-group-prepend">
+//                                     <span className="input-group-text"><i class="fa fa-user"></i></span>
+//                                 </div>
+//                                 <input className="form-control" type="email" name="emailAddress" onChange={this.changeHandler}  placeholder="Email Address" />
+//                             </div>
+//                             <div className="input-group mb-3">
+//                                 <div className="input-group-prepend">
+//                                     <span className="input-group-text"><i class="fa fa-lock"></i></span>
+//                                 </div>
+//                                 <input className="form-control" type="password" name="password" onChange={this.changeHandler} placeholder="Password" />
+//                             </div>
+                            
+//                         <Button variant="primary" block onClick={this.loginHandler}>Login</Button>
+//                             {/* <button type="button" className="btn btn-secondary btn-block" onClick={this.loginHandler}>LOGIN</button> */}
+//                             <div className="message">
+//                             </div>
+//                         </form>
+
+//                     </div>
+//                 </div>
+//             </div>
+    
+
         )
     }
 }
+// ReactDOM.render(
+// <Login/>, 
+// document.getElementById('root'));

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { Alert } from 'react-bootstrap';
-
+import './UserStyle.css';
 
 export default class Register extends Component {
     constructor(props) {
@@ -87,7 +87,6 @@ export default class Register extends Component {
                     </Form.Group>
                     <Button variant="primary" block onClick={this.registerHandler}>Register</Button>
                 </Container>
-
             </div>
         )
     }
