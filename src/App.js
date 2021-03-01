@@ -256,7 +256,7 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
-            <div className="row"> <img style={{margin:"5px"}} src="./public/book-club.png"/><h1 style={{margin:"5px"}}>Book Club </h1></div>
+            <div className="row"> <img style={{margin:"10px"}} src="./public/book-club.png"/><h1 style={{margin:"5px"}}>Book Club </h1></div>
             {(isAuth && this.state.user != null) ?
               <div className="nav-bar">
                 <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
