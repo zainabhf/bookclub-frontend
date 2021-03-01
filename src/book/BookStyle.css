@@ -55,9 +55,14 @@ border: 1px solid rgb(82, 79, 79);
    
 }
 .book-title{
-    margin: 20px;
-    font-size: 50px;
-    font-size: 40px;
+    
+    position: relative;
+    bottom: 50px;
+    left: 10px;
+    padding:60px;
+    font-size: 30px;
+    width: 600px;
+    height: 200px;
     color: #99725e;
     font-family: 'Inconsolata', monospace;
    
@@ -74,8 +79,8 @@ border: 1px solid rgb(82, 79, 79);
 }
 .book-author{
     position: relative;
-    bottom: 300px;
-    left: 250px;
+    bottom: 200px;
+    left: 300px;
     margin: 20px;
     font-size: 50px;
     font-size: 30px;
