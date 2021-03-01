@@ -1,6 +1,8 @@
 .nav-bar {
     width: 100%;
-    background-color: #978e75;
+    background-color: #f0f0f0 ;
+    border: 2px solid #b68973;
+
     overflow: auto;
   }
   
@@ -10,11 +12,14 @@
     text-align: center;
     padding: 5px 0;
     transition: all 0.3s ease;
-    color: white;
-    font-size: 20px;
+    color: #8f8772;
+    font-weight: 700;
+    font-size: 25px;
   }
   
-  .Link:hover{
-    background-color: #746d5a;
+  .link:hover{
+   text-shadow:0 0 10px gray;
+    text-decoration: none;
+    color: #8f8772;
   }
   

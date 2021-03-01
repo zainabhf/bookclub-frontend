@@ -256,20 +256,21 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
+            <div> <img src="../public/book-club.png"/><h1>Book Club </h1></div>
             {(isAuth && this.state.user != null) ?
               <div className="nav-bar">
-                <Link className="link" to="/">Home</Link>{' '}
+                <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
                 <Link className="link" to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link  className="link" to="/book/add" >Add Book</Link>{' '}
+                <Link  className="link" to="/book/add" >New Book</Link>{' '}
                 <Link className="link" to="/user/profile">Profile</Link>{' '}
                 <Link  className="link" to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
               </div>
               :
-              <div>
-                < Link to="/">Home</Link>{' '}
-                <Link to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link to="/user/login">Login</Link>{' '}
-                <Link to="/user/register">Register</Link>{' '}
+              <div className="nav-bar">
+                < Link className="link" to="/">Home</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
+                <Link  className="link" to="/user/login">Login</Link>{' '}
+                <Link className="link" to="/user/register">Register</Link>{' '}
               </div>
             }
             <div>
