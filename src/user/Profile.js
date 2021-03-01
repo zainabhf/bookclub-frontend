@@ -60,16 +60,17 @@ export default class Profile extends Component {
         let temp = { ...this.state.tempUserForEditingPassword }
 
         temp["emailAddress"] = this.state.user.emailAddress
-        temp["userRole"] = "ROLE_USER"
+        temp["userRole"] = this.state.user.userRole
         temp["image"] = this.state.user.image
         temp["name"] = this.state.user.name
         temp["id"] = this.state.user.id
 
+        const name = e.target.name
 
-        temp["password"] = e.target.value;
-        temp["newPassword"] = e.target.value;
-        temp["confirmNewPassword"] = e.target.value;
+        temp[name] = e.target.value;
 
+        console.log(e.target.value)
+        console.log(e.target)
 
         this.setState({
             tempUserForEditingPassword: temp
@@ -87,15 +88,18 @@ export default class Profile extends Component {
 
     submitHandlerPassword = () => {
 
-        console.log("It's right .. both pass is matched")
-        console.log("UPDATED PASS")
-
-        this.setState({
-            isClick: false
-        })
 
 
-        this.props.updatePassword(this.state.tempUserForEditingPassword)
+        if (this.isMatchPassword(this.state.tempUserForEditingPassword.updatedPassword, this.state.tempUserForEditingPassword.confirmUpdatedPassword)) {
+            this.props.updatePassword(this.state.tempUserForEditingPassword)
+
+            console.log("It's right .. both pass is matched")
+            console.log("UPDATED PASS")
+
+            this.setState({
+                isClick: false
+            })
+        }
     }
 
     render() {
@@ -108,65 +112,71 @@ export default class Profile extends Component {
         return (
             <div>
 
-
-                {(this.state.isClick != true) ?
+                {(this.props.userToken != "") ?
                     <div>
-                        <p>Name: {this.state.user.name}</p>
-                        <p>Role: {this.state.user.userRole}</p>
-                        <p>Email Address: {this.state.user.emailAddress}</p>
-                        <img src={this.state.user.image} alt="Profile Picture" />
-                        <button onClick={this.editViewProfile}>Edit Profile</button>
-                        <button onClick={this.editViewChangePassword}>Change Password</button>
-                    </div>
-                    :
-                    <div>
-                        {(this.state.isEdit == true) ?
-
+                        {(this.state.isClick != true) ?
                             <div>
-                                < Container >
-                                    <Form.Group>
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" name="name" value={this.state.user.name} onChange={this.changeHandlerEditProfile}></Form.Control>
-                                    </Form.Group>
-
-                                    <Form.Group>
-                                        <Form.Label>Profile Image URL</Form.Label>
-                                        <Form.Control type="text" name="image" value={this.state.user.image} onChange={this.changeHandlerEditProfile}></Form.Control>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Email Address</Form.Label>
-                                        <Form.Control type="email" name="emailAddress" value={this.state.user.emailAddress} onChange={this.changeHandlerEditProfile} disabled></Form.Control>
-                                    </Form.Group>
-
-
-                                    <Button variant="primary" block onClick={this.submitHandlerEditProfile}>Submit</Button>
-                                </Container >
+                                <p>Name: {this.state.user.name}</p>
+                                <p>Role: {this.state.user.userRole}</p>
+                                <p>Email Address: {this.state.user.emailAddress}</p>
+                                <img src={this.state.user.image} alt="Profile Picture" />
+                                <button onClick={this.editViewProfile}>Edit Profile</button>
+                                <button onClick={this.editViewChangePassword}>Change Password</button>
                             </div>
                             :
                             <div>
-                                < Container >
-                                    <Form.Group>
-                                        <Form.Label>Old Password</Form.Label>
-                                        <Form.Control type="password" name="password" onChange={this.changeHandlerPassword}></Form.Control>
-                                    </Form.Group>
+                                {(this.state.isEdit == true) ?
 
-                                    <Form.Group>
-                                        <Form.Label>New Password</Form.Label>
-                                        <Form.Control type="password" name="newPassword" onChange={this.changeHandlerPassword}></Form.Control>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control type="password" name="confirmNewPassword" onChange={this.changeHandlerPassword}></Form.Control>
-                                    </Form.Group>
+                                    <div>
+                                        < Container >
+                                            <Form.Group>
+                                                <Form.Label>Name</Form.Label>
+                                                <Form.Control type="text" name="name" value={this.state.user.name} onChange={this.changeHandlerEditProfile}></Form.Control>
+                                            </Form.Group>
+
+                                            <Form.Group>
+                                                <Form.Label>Profile Image URL</Form.Label>
+                                                <Form.Control type="text" name="image" value={this.state.user.image} onChange={this.changeHandlerEditProfile}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group>
+                                                <Form.Label>Email Address</Form.Label>
+                                                <Form.Control type="email" name="emailAddress" value={this.state.user.emailAddress} onChange={this.changeHandlerEditProfile} disabled></Form.Control>
+                                            </Form.Group>
 
 
-                                    <Button variant="primary" block onClick={this.submitHandlerPassword}>Submit</Button>
-                                </Container >
+                                            <Button variant="primary" block onClick={this.submitHandlerEditProfile}>Submit</Button>
+                                        </Container >
+                                    </div>
+                                    :
+                                    <div>
+                                        < Container >
+                                            <Form.Group>
+                                                <Form.Label>Old Password</Form.Label>
+                                                <Form.Control type="password" name="password" onChange={this.changeHandlerPassword}></Form.Control>
+                                            </Form.Group>
+
+                                            <Form.Group>
+                                                <Form.Label>New Password</Form.Label>
+                                                <Form.Control type="password" name="updatedPassword" onChange={this.changeHandlerPassword}></Form.Control>
+                                            </Form.Group>
+                                            <Form.Group>
+                                                <Form.Label>Confirm Password</Form.Label>
+                                                <Form.Control type="password" name="confirmUpdatedPassword" onChange={this.changeHandlerPassword}></Form.Control>
+                                            </Form.Group>
+
+
+                                            <Button variant="primary" block onClick={this.submitHandlerPassword}>Submit</Button>
+                                        </Container >
+                                    </div>
+                                }
                             </div>
                         }
                     </div>
+                    :
+                    <div>No User is logged in !</div>
                 }
             </div >
+
         )
     }
 }
