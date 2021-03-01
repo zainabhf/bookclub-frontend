@@ -97,3 +97,12 @@ border: 1px solid rgb(82, 79, 79);
      font-size: 20px;
      
  }
+ .btn {
+    
+    border: none; 
+   
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer; 
+  }
+  
