@@ -55,16 +55,20 @@ export default class AddReview extends Component {
     render() {
         return (
             <div className="AddReviewContainer">
-                <Container >
-                    <Form.Group >
-                        <Form.Label>Add Review</Form.Label>
-                        <br />
-                        <textarea type="text" rows="10" cols="90" name="reviewContent" value={this.state.reviewValue} placeholder="add review to the book" onChange={this.handleChangeReview}></textarea>
-                        <br />
+                {(this.props.userToken != "") ?
+                    <Container >
+                        <Form.Group >
+                            <Form.Label>Add Review</Form.Label>
+                            <br />
+                            <textarea type="text" rows="10" cols="90" name="reviewContent" value={this.state.reviewValue} placeholder="add review to the book" onChange={this.handleChangeReview}></textarea>
+                            <br />
 
-                        <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
-                    </Form.Group>
-                </Container>
+                            <Button variant="primary" onClick={this.handelSubmitReview}>Submit</Button>
+                        </Form.Group>
+                    </Container>
+                    :
+                    <div></div>
+                }
             </div>
         )
     }

@@ -171,7 +171,7 @@ export default class Detail extends Component {
                         </div>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
                             <div>
-                                <Button className="botton-detile" variant="secondary"  style={{ margin: "5px" }} onClick={() => { this.props.editView() }}> <i class="fa fa-wrench"></i> Edit</Button>
+                                <Button className="botton-detile" variant="secondary" style={{ margin: "5px" }} onClick={() => { this.props.editView() }}> <i class="fa fa-wrench"></i> Edit</Button>
                                 <Button className="botton-detile" variant="danger" style={{ margin: "5px" }} onClick={() => { this.props.deleteBook(this.props.book.id) }}> <i class="fa fa-trash"></i> Delete</Button>
                             </div>
                             :
@@ -199,6 +199,7 @@ export default class Detail extends Component {
                             addReview={this.addBookReview}
                             submitEditReview={this.submitEditReview}
                             isEditReview={this.state.isEditReview}
+                            userToken={this.props.userToken}
                         />
 
                     </div>
