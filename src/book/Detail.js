@@ -160,29 +160,19 @@ export default class Detail extends Component {
                 { (this.props.book != null) ?
                     <div>
 
-                        <div className="row-detile">
-
-
+                        <div >
                             <img className="image-detile" src={this.props.book.image} alt="Book Cover" />
-                            <p className="book-title"> {this.props.book.bookName}</p><br /><br />
-
-
-                        </div>
-
-                        <p className="book-descreption">Description:  {this.props.book.description}</p>
-
-
-                        <h4 className="book-author">Written By: {this.props.book.authorName}</h4>
-                        <hr/>
-                        <div className="book-date">
-                            <p >Pages: {this.props.book.numberOfpages}</p>
-                            <p >Publishing Date: {this.props.book.publish}</p>
+                            <p className="book-title"> {this.props.book.bookName}</p>
+                            <p className="book-descreption">Description:  {this.props.book.description}</p>
+                            <hr></hr>
+                            <h4 className="book-author">Written By: {this.props.book.authorName}</h4>
+                            <p className="book-page" >Pages: {this.props.book.numberOfpages}</p>
+                            <p className="book-date" >Publishing Date: {this.props.book.publish}</p>
                         </div>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
                             <div>
-                                <Button variant="outline-secondary" style={{margin:"5px"}} onClick={() => { this.props.editView() }}>Edit</Button>
-                                <Button variant="outline-danger"  style={{margin:"5px"}} onClick={() => { this.props.deleteBook(this.props.book.id) }}> <i class="fa fa-trash"></i>Delete</Button>
-
+                                <Button className="botton-detile" variant="secondary"  style={{ margin: "5px" }} onClick={() => { this.props.editView() }}> <i class="fa fa-wrench"></i> Edit</Button>
+                                <Button className="botton-detile" variant="danger" style={{ margin: "5px" }} onClick={() => { this.props.deleteBook(this.props.book.id) }}> <i class="fa fa-trash"></i> Delete</Button>
                             </div>
                             :
                             <div>

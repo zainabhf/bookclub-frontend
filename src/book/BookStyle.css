@@ -43,24 +43,22 @@ border: 1px solid rgb(82, 79, 79);
      color: #1e212d;
    
 }
-.row-detile{
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 10px;
-    justify-content:flex-start;
-}
+
 .image-detile{
-    width: 250px;
-   height: 350px;
- 
+    width: 300px;
+   height: 450px;
+   position: relative;
+  top: 10px;
+   left: 20px;
+ margin-bottom: 10px;
    
 }
 .book-title{
     
     position: relative;
-    bottom: 50px;
-    left: 10px;
-    padding:60px;
+    bottom: 300px;
+    left: 50px;
+    margin-left:300px;
     font-size: 30px;
     width: 600px;
     height: 200px;
@@ -70,27 +68,29 @@ border: 1px solid rgb(82, 79, 79);
 }
 .book-descreption{
    position: relative;
-  top:  50px;
+  bottom:200px;
    left: 10px;
    color: #433520;
    font-family: 'Akaya Telivigala', cursive;
    font-family: 'Amiri', serif;
     font-size: 20px;
+margin-top: 30px;
    
 }
 .book-author{
     position: relative;
-    bottom: 200px;
-    left: 300px;
-    margin: 20px;
+    bottom: 400px;
+    left: 350px;
+    margin:auto;
     font-size: 50px;
     font-size: 30px;
     color: #1e212d;
     font-family: 'Akaya Telivigala', cursive;
+    margin-top: auto;
 }
 .book-date{
     position: relative;
-   bottom: 10px;
+   bottom: 250px;
     left: 10px;
     color: #433520;
     font-family: 'Akaya Telivigala', cursive;
@@ -98,14 +98,18 @@ border: 1px solid rgb(82, 79, 79);
      font-size: 20px;
      
  }
- .btn {
-    
-    border: none; 
-   
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer; 
-  }
-
-
-  
+ .book-page{
+    position: relative;
+   bottom: 250px;
+    left: 10px;
+    color: #433520;
+    font-family: 'Akaya Telivigala', cursive;
+    font-family: 'Amiri', serif;
+     font-size: 20px;
+     
+ }
+ .botton-detile{
+    position: relative;
+    bottom: 250px;
+     left: 10px;
+ }
