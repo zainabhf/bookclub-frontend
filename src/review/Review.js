@@ -31,7 +31,7 @@ export default class Review extends Component {
                                             <div className="button-container" >
                                                 {((this.props.user.userRole == "ROLE_ADMIN") || (review.user != null && review.user.id == this.props.user.id)) ?
                                                     <div className="button-container" >
-                                                        <Button variant="secondary"onClick={() => this.props.editViewReview(review)}>Edit</Button>
+                                                        <Button variant="secondary"onClick={() => this.props.editViewReview(review)}><i class="fa fa-wrench"></i> Edit</Button>
                                                         <Button variant="danger" onClick={() => this.props.deleteReview(review)}><i class="fa fa-trash"></i> Delete</Button>
                                                         
                                                         {console.log(review)}
