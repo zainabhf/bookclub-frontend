@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import EditReview from '../review/EditReview'
 import AddReview from '../review/AddReview'
+import { Button} from 'react-bootstrap'
+
 import './reviewStyle.css'
+
+
 export default class Review extends Component {
 
     render() {
@@ -20,19 +24,24 @@ export default class Review extends Component {
                                         <img class="review-img" src={review.user.image}  />
                                         <p class="name">{review.user.name}</p>
                                         </div>
-                                        <p>{review.reviewContent}</p>
-
+                                        
+                                        <p class="review">{review.reviewContent}</p>
+                                        
                                         {(this.props.user != null) ?
-                                            <div>
+                                            <div className="button-container" >
                                                 {((this.props.user.userRole == "ROLE_ADMIN") || (review.user != null && review.user.id == this.props.user.id)) ?
-                                                    <div>
-                                                        <button onClick={() => this.props.editViewReview(review)}>Edit</button>
-                                                        <button onClick={() => this.props.deleteReview(review)}>Delete</button>
+                                                    <div className="button-container" >
+                                                        <Button variant="secondary"onClick={() => this.props.editViewReview(review)}><i class="fa fa-wrench"></i> Edit</Button>
+                                                        <Button variant="danger" onClick={() => this.props.deleteReview(review)}><i class="fa fa-trash"></i> Delete</Button>
+                                                        
                                                         {console.log(review)}
                                                         {console.log(review.user.name)}
                                                         {console.log(review.user.id)}
                                                     </div>
+                                                    
+                                                     
                                                     :
+                                                    
                                                     <div></div>
                                                 }
                                             </div>
@@ -44,6 +53,7 @@ export default class Review extends Component {
 
                                     </div>
                                     </div>
+                                    
                                 )
                                 }
                             </div>

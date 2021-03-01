@@ -1,4 +1,4 @@
-*{
+#root{
     background-color:#e2dfd5;
     
 
@@ -8,7 +8,8 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 10px;
+    height: 70%;
     
     width:90%;
   

@@ -54,7 +54,7 @@ export default class AddReview extends Component {
 
     render() {
         return (
-            <div>
+            <div className="AddReviewContainer">
                 <Container >
                     <Form.Group >
                         <Form.Label>Add Review</Form.Label>
