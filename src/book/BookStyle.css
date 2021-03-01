@@ -38,6 +38,8 @@ border: 1px solid rgb(82, 79, 79);
       padding:20px;
      text-align: center;
      margin-bottom: .1rem;
+     font-family: 'Inconsolata', monospace;
+     color: #1e212d;
    
 }
 .row-detile{
