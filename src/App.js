@@ -7,13 +7,13 @@ import Login from './user/Login';
 import AddBook from './book/AddBook';
 import Register from './user/Register';
 import Profile from './user/Profile';
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
 import { Card, Alert, Fade } from 'react-bootstrap';
 import './book/Alert.css'
 import './NavBar.css'
+// import '../public/book-club.png'
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -225,7 +225,7 @@ export default class App extends Component {
       })
       .catch(error => {
         this.setState({
-          errorMessage: "Oops ! something went wrong while updating profile"
+          // errorMessage: "Oops ! something went wrong while updating profile"
 
         })
         console.log(" Error while updating the password ");
@@ -256,21 +256,21 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
-            <div> <img src="../public/book-club.png"/><h1>Book Club </h1></div>
+            <div className="row"> <img style={{margin:"5px"}} src="./public/book-club.png"/><h1 style={{margin:"5px"}}>Book Club </h1></div>
             {(isAuth && this.state.user != null) ?
               <div className="nav-bar">
                 <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
-                <Link className="link" to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link  className="link" to="/book/add" >New Book</Link>{' '}
-                <Link className="link" to="/user/profile">Profile</Link>{' '}
-                <Link  className="link" to="/user/logout" onClick={this.logout}>Logout</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
+                <Link  className="link" to="/book/add" > <i class="fa fa-plus-square-o"></i> New Book</Link>{' '}
+                <Link className="link" to="/user/profile"> <i class="fa fa-address-card-o"></i> Profile</Link>{' '}
+                <Link  className="link" to="/user/logout" onClick={this.logout}> <i class="fa fa-sign-out"></i> Logout</Link>{' '}
               </div>
               :
               <div className="nav-bar">
-                < Link className="link" to="/">Home</Link>{' '}
-                <Link className="link" to="/book/index" onClick={this.backToBooks}>Books</Link>{' '}
-                <Link  className="link" to="/user/login">Login</Link>{' '}
-                <Link className="link" to="/user/register">Register</Link>{' '}
+                < Link className="link" to="/"> <i class="fa fa-home"></i>Home</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
+                <Link  className="link" to="/user/login"> <i class="fa fa-sign-in"></i> Login</Link>{' '}
+                <Link className="link" to="/user/register"> <i class="fa fa-user-plus"></i> Register</Link>{' '}
               </div>
             }
             <div>

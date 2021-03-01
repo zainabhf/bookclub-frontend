@@ -181,7 +181,7 @@ export default class Detail extends Component {
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
                             <div>
                                 <Button variant="outline-secondary" style={{margin:"5px"}} onClick={() => { this.props.editView() }}>Edit</Button>
-                                <Button variant="outline-danger"  style={{margin:"5px"}} onClick={() => { this.props.deleteBook(this.props.book.id) }}>Delete</Button>
+                                <Button variant="outline-danger"  style={{margin:"5px"}} onClick={() => { this.props.deleteBook(this.props.book.id) }}> <i class="fa fa-trash"></i>Delete</Button>
 
                             </div>
                             :
