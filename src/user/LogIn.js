@@ -44,7 +44,7 @@ export default class Login extends Component {
                         </div>
                     </div>
                     <div className="body-form">
-                        <form style={{ backgroundColor: "#b68973" }}
+                        <form style={{ backgroundColor: " #f0f0f0" }}
                         >
                             <div className="input-group mb-3">
                                 <div className="input-group-prepend">
