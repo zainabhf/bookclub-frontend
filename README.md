@@ -6,7 +6,7 @@ Finally, only the admin can add, edit and delete any book or review.
 
 ## Wireframes
 
-[Wireframes](http://https://drive.google.com/file/d/1fv5WuSzKo-_AJWk-zjj0VMIpfkI8sFp6/view?usp=sharing "Wireframes")
+[Wireframes](https://drive.google.com/file/d/1fv5WuSzKo-_AJWk-zjj0VMIpfkI8sFp6/view?usp=sharing "Wireframes")
 
 
 ## user stories
@@ -28,6 +28,6 @@ Finally, only the admin can add, edit and delete any book or review.
 - as an admin, I want to delete any review
 
 ## Installation Instructions
-[ React Installation  ](http:/https://drive.google.com/file/d/1ZpX-zCX8fwInO9m_boOH4YXHPQRK2Eqh/view?usp=sharing/ "React Instructions ")
+[ React Installation  ](https://drive.google.com/file/d/1ZpX-zCX8fwInO9m_boOH4YXHPQRK2Eqh/view?usp=sharing/ "React Instructions ")
 
 
