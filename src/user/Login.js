@@ -60,7 +60,6 @@ export default class Login extends Component {
                             </div>
 
                             <Button variant="dark" block onClick={this.loginHandler}> Login</Button>
-                            {/* <button type="button" className="btn btn-secondary btn-block" onClick={this.loginHandler}>LOGIN</button> */}
                             <div className="message">
                             </div>
                         </form>
@@ -73,6 +72,3 @@ export default class Login extends Component {
         )
     }
 }
-ReactDOM.render(
-    <Login />,
-    document.getElementById('root'));

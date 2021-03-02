@@ -1,25 +1,23 @@
 .nav-bar {
-    width: 100%;
-    background-color: #f0f0f0 ;
-    border: 2px solid #b68973;
+  width: 100%;
+  background-color: #f0f0f0;
+  border: 1px solid #b68973;
+  overflow: auto;
+}
 
-    overflow: auto;
-  }
-  
-  .link {
-    float: left;
-    width: 20%;
-    text-align: center;
-    padding: 5px 0;
-    transition: all 0.3s ease;
-    color: #8f8772;
-    font-weight: 700;
-    font-size: 25px;
-  }
-  
-  .link:hover{
-   text-shadow:0 0 10px gray;
-    text-decoration: none;
-    color: #8f8772;
-  }
-  
+.link {
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 10px;
+  transition: all 0.7s ease;
+  color: #8f8772;
+  font-weight: 400;
+  font-size: 23px;
+}
+
+.link:hover {
+  text-shadow: 0 0 35px black;
+  text-decoration: none;
+  color: #8f8772;
+}
