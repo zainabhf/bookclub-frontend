@@ -1,4 +1,4 @@
-.review-img{
+.review-img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -6,60 +6,63 @@
 
 
 }
-.user-row{
-    
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        padding: 10px;
-background-color: #d3d0c2; 
-border-top-left-radius: 25px; 
-border-top-right-radius: 25px; 
 
-    
-}
-.name{
-    background-color: #d3d0c2;    
- font-size: 18px;
- font-weight: bold;
- padding-top: 8px;
- padding-left: 20px;
+.user-row {
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+    background-color: #d3d0c2;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+
+
 }
 
-.test{
-   
+.name {
+    background-color: #d3d0c2;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-left: 20px;
+}
+
+.test {
+
     border: 0.5px solid gray;
     margin: 50px auto;
-border-radius: 25px;
-width: 75%;
-    
+    border-radius: 25px;
+    width: 75%;
+
 
 
 }
 
-.review{
+.review {
     border: 0.5px solid gray;
-width: 80%;
-padding: 20px;
-margin: 20px auto;
+    width: 80%;
+    padding: 20px;
+    margin: 20px auto;
     background-color: #f0f0f0;
+    word-wrap: break-word;
 }
 
-.button-container{
+.button-container {
     margin-left: 10%;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 
 }
 
-.button-container>button{
-margin: 5px;
+.button-container>button {
+    margin: 5px;
 
 }
-textarea{
+
+textarea {
     background-color: #f0f0f0;
-border: 1px solid gray;
-border-radius: 10px;
-padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
 }
-

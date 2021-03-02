@@ -33,10 +33,26 @@ export default class App extends Component {
     }
   }
 
+  loadBook = () => {
+    axios
+      .get("/bookclub/book/index")
+      .then(response => {
+        console.log("loadBook")
+        console.log(response)
+        this.setState({
+          books: response.data,
+        })
+
+      })
+      .catch(error => {
+        console.log("Error retreiving books !!");
+        console.log(error);
+      })
+  }
   componentDidMount() {
 
     let token = localStorage.getItem("token");
-
+    this.loadBook()
 
     if (token != null) {
       let user = decode(token);
@@ -54,6 +70,8 @@ export default class App extends Component {
         this.setState({
           isAuth: false,
         });
+
+        this.logout()
       }
     }
 
@@ -180,6 +198,7 @@ export default class App extends Component {
             user: response.data
           })
           console.log(this.state.user)
+          this.loadBook()
 
         })
         .catch(error => {
@@ -264,27 +283,27 @@ export default class App extends Component {
             {/* <div className="row"> <img style={{ margin: "10px" }} src="./public/book-club.png" /><h1 style={{ margin: "5px" }}>Book Club </h1></div> */}
             {(isAuth && this.state.user != null) ?
               <div className="nav-bar">
-                <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
-                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
-                <Link className="link" to="/book/add" > <i class="fa fa-plus-square-o"></i> New Book</Link>{' '}
-                <Link className="link" to="/user/profile"> <i class="fa fa-address-card-o"></i> Profile</Link>{' '}
-                <Link className="link" to="/user/logout" onClick={this.logout}> <i class="fa fa-sign-out"></i> Logout</Link>{' '}
+                <Link className="link" to="/">HOME</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}>BOOKS</Link>{' '}
+                <Link className="link" to="/book/add" >NEW BOOK</Link>{' '}
+                <Link className="link" to="/user/profile">PROFILE</Link>{' '}
+                <Link className="link" to="/user/logout" onClick={this.logout}>LOGOUT</Link>{' '}
               </div>
               :
               <div className="nav-bar">
-                < Link className="link" to="/"> <i class="fa fa-home"></i>Home</Link>{' '}
-                <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
-                <Link className="link" to="/user/login"> <i class="fa fa-sign-in"></i> Login</Link>{' '}
-                <Link className="link" to="/user/register"> <i class="fa fa-user-plus"></i> Register</Link>{' '}
+                < Link className="link" to="/">HOME</Link>{' '}
+                <Link className="link" to="/book/index" onClick={this.backToBooks}>BOOKS</Link>{' '}
+                <Link className="link" to="/user/login">LOGIN</Link>{' '}
+                <Link className="link" to="/user/register">REGISTER</Link>{' '}
               </div>
             }
-            <div className="app-container">
+            <div>
               <Route exact path="/" component={Home} />
               <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} user={this.state.user} userToken={this.state.userToken} />} />
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />
-              <Route path="/user/profile" component={() => <Profile user={this.state.user} updateProfile={this.updateProfile} successMessage={this.state.successMessage} updatePassword={this.updatePassword} userToken={this.state.userToken} />} />
+              <Route path="/user/profile" component={() => <Profile user={this.state.user} updateProfile={this.updateProfile} successMessage={this.state.successMessage} updatePassword={this.updatePassword} userToken={this.state.userToken} books={this.state.books} book={this.state.book} redirect={this.state.redirect} />} />
             </div>
 
           </Router>
