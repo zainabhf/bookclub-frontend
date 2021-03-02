@@ -163,7 +163,7 @@ export default class Index extends Component {
                                 {(this.state.isEdit === true) ?
                                     <EditBook book={this.state.book} editBook={this.editBook} key={this.state.book.id} />
                                     :
-                                    <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} user={this.props.user} />
+                                    <Detail book={this.state.book} editView={this.editView} key={this.state.book.id} deleteBook={this.deleteBook} isEdit={this.state.isEdit} user={this.props.user} userToken={this.props.userToken} />
                                 }
                             </div>
 

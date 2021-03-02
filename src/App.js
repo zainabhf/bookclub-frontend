@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import './book/Alert.css'
+import './NavBar.css'
 import './App.css';
+import './HomeStyle.css'
 import Index from './book/Index';
 import Home from './Home';
 import Login from './user/Login';
@@ -10,9 +13,8 @@ import Profile from './user/Profile';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 import { Redirect } from "react-router-dom";
-import { Card, Alert, Fade } from 'react-bootstrap';
-import './book/Alert.css'
-import './NavBar.css'
+import { Alert } from 'react-bootstrap';
+
 // import '../public/book-club.png'
 export default class App extends Component {
   constructor(props) {
@@ -163,7 +165,7 @@ export default class App extends Component {
       user: null,
       userToken: "",
       redirect: '../',
-      successMessage:"Bye Bye See you Later"
+      successMessage: "Bye Bye See you Later"
     });
   };
 
@@ -197,7 +199,7 @@ export default class App extends Component {
           console.log(response)
           this.setState({
             user: user,
-          
+
           })
           console.log(this.state.user)
 
@@ -245,7 +247,7 @@ export default class App extends Component {
     ) : null
 
     return (
-      <div >
+      <div>
         {errorMessage}
         {successMessage}
         <nav>
@@ -256,26 +258,29 @@ export default class App extends Component {
               <Redirect to={this.state.redirect} />
 
             </div>
-            <div className="row"> <img style={{margin:"10px"}} src="./public/book-club.png"/><h1 style={{margin:"5px"}}>Book Club </h1></div>
+            <div>
+              <img src="Bookclub-header.png" alt="book club header" className="header-image" />
+            </div>
+            {/* <div className="row"> <img style={{ margin: "10px" }} src="./public/book-club.png" /><h1 style={{ margin: "5px" }}>Book Club </h1></div> */}
             {(isAuth && this.state.user != null) ?
               <div className="nav-bar">
                 <Link className="link" to="/"> <i class="fa fa-home"></i> Home</Link>{' '}
                 <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
-                <Link  className="link" to="/book/add" > <i class="fa fa-plus-square-o"></i> New Book</Link>{' '}
+                <Link className="link" to="/book/add" > <i class="fa fa-plus-square-o"></i> New Book</Link>{' '}
                 <Link className="link" to="/user/profile"> <i class="fa fa-address-card-o"></i> Profile</Link>{' '}
-                <Link  className="link" to="/user/logout" onClick={this.logout}> <i class="fa fa-sign-out"></i> Logout</Link>{' '}
+                <Link className="link" to="/user/logout" onClick={this.logout}> <i class="fa fa-sign-out"></i> Logout</Link>{' '}
               </div>
               :
               <div className="nav-bar">
                 < Link className="link" to="/"> <i class="fa fa-home"></i>Home</Link>{' '}
                 <Link className="link" to="/book/index" onClick={this.backToBooks}> <i class="fa fa-reorder"></i> Books</Link>{' '}
-                <Link  className="link" to="/user/login"> <i class="fa fa-sign-in"></i> Login</Link>{' '}
+                <Link className="link" to="/user/login"> <i class="fa fa-sign-in"></i> Login</Link>{' '}
                 <Link className="link" to="/user/register"> <i class="fa fa-user-plus"></i> Register</Link>{' '}
               </div>
             }
-            <div>
+            <div className="app-container">
               <Route exact path="/" component={Home} />
-              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} user={this.state.user} />} />
+              <Route path="/book/index" component={() => <Index book={this.state.book} isEdit={this.state.sEdit} redirect={this.state.redirect} books={this.state.books} user={this.state.user} userToken={this.state.userToken} />} />
               <Route path="/book/add" component={() => <AddBook addBook={this.addBook} />} />
               <Route path="/user/login" component={() => <Login login={this.login} />} />
               <Route path="/user/register" component={() => <Register register={this.register} />} />

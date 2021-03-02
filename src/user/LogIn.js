@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 export default class Login extends Component {
 

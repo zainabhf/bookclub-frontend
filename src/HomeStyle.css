@@ -1,0 +1,88 @@
+.header-image {
+    width: 100%;
+    height: 30vh;
+}
+
+.app-container {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+
+.landing {
+    text-align: center;
+    width: 90vw;
+    height: 80vh;
+    margin: auto;
+    display: block;
+}
+
+.footer {
+    /* border: 1px solid gray; */
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    padding: 5vh;
+    margin-bottom: 3px;
+    background-color: #dad6ca;
+    border-radius: 25px;
+}
+
+
+.inline {
+    display: inline;
+}
+
+.icon {
+    width: 1vw;
+    height: 2vh
+}
+
+.fancy {
+    line-height: 3px;
+    text-align: center;
+}
+
+.fancy span {
+    display: inline-block;
+    position: relative;
+    font-family: 'Dancing Script';
+    font-size: 3vw;
+}
+
+.fancy span:before,
+.fancy span:after {
+    content: "";
+    position: absolute;
+    height: 7px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    top: 0;
+    width: 30vw;
+}
+
+.fancy span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.fancy span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.footer-linkes {
+    text-decoration: none;
+    color: black;
+}
+
+.footer-linkes:hover {
+    text-decoration: none;
+    color: black;
+    text-shadow: 0 0 10px gray;
+}
+
+.footer-text {
+    padding-left: 10vw;
+}
