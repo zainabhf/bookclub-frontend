@@ -1,4 +1,4 @@
-*{
+#root{
     background-color:#e2dfd5;
     
 
@@ -51,15 +51,15 @@ border: 1px solid rgb(82, 79, 79);
    height: 450px;
    position: relative;
   top: 10px;
-   left: 20px;
+   left: 5px;
  margin-bottom: 10px;
    
 }
 .main-continer{
-    position: relative;
-    bottom: 450px;
-    left:350px;
-    margin:10px;
+    position: absolute;
+    top: 400px;
+    left: 500px;
+    margin: 10px;
 }
 .book-title{
     font-size: 30px;
@@ -94,10 +94,12 @@ border: 1px solid rgb(82, 79, 79);
      
  }
  .continer-detile{
-    position: relative;
-    bottom: 200px;
-     left: 10px;
-padding: 10px;
+    position: absolute;
+    top: 550px;
+    left: 500px;
+    
+  
+
  }
  .book-page{
     
@@ -108,9 +110,9 @@ padding: 10px;
      
  }
  .botton-detile{
-    position: relative;
-    bottom: 200px;
-     left: 10px;
-     padding: 10px;
-     margin-right:5px;
+    position: absolute;
+    top: 750px;
+    left: 750px;
+    margin: 10px;
+   
  }
