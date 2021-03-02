@@ -164,12 +164,13 @@ export default class Detail extends Component {
                             <img className="image-detile" src={this.props.book.image} alt="Book Cover" />
                             <div className="main-continer">
                                 <p className="book-title"> {this.props.book.bookName}</p>
-                                <h4 className="book-author">Written By: {this.props.book.authorName}</h4>
                             </div>
                             <div className="continer-detile">
+                                <h4 className="book-author">Written By: {this.props.book.authorName}</h4>
                                 <p className="book-descreption">Description:  {this.props.book.description}</p>
                                 <p className="book-page" >Pages: {this.props.book.numberOfpages}</p>
-                                <p className="book-date" >Publishing Date: {this.props.book.publish}</p>
+                                <p className="book-date" >Publishing Date: {this.props.book.publish}</p> <br/>
+
                             </div>
                         </div>
                         {(this.props.user != null && this.props.user.userRole == "ROLE_ADMIN") ?
@@ -191,6 +192,7 @@ export default class Detail extends Component {
                         }
 
                         <hr />
+                        <br />
 
                         <Review
                             book={this.props.book}
